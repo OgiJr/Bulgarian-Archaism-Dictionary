@@ -52,6 +52,7 @@ namespace ArchaismDictionaryAndroidApp
                 Log.Error("Main Activity", "Имаше грешка при инициализирането на Google Vision");
             }
 
+
             Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
@@ -87,6 +88,16 @@ namespace ArchaismDictionaryAndroidApp
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            switch (requestCode)
+            {
+                case requestCameraPermission:
+                    if (grantResults[0] == Android.Content.PM.Permission.Granted)
+                    {
+                        cameraSource.Start(cameraView.Holder);
+                    }
+                    break;
+            }
         }
 
         public void SurfaceChanged(ISurfaceHolder holder, [GeneratedEnum] Format format, int width, int height)
@@ -102,9 +113,9 @@ namespace ArchaismDictionaryAndroidApp
                 {
                 Android.Manifest.Permission.Camera
                 }, requestCameraPermission);
-
-                cameraSource.Start(cameraView.Holder);
+                return;
             }
+            cameraSource.Start(cameraView.Holder);
         }
 
         public void SurfaceDestroyed(ISurfaceHolder holder)
@@ -120,8 +131,7 @@ namespace ArchaismDictionaryAndroidApp
                 StringBuilder stringBuilder = new StringBuilder();
                 for(int i = 0; i < items.Size(); i++)
                 {
-                    TextBlock item = (TextBlock)items.ValueAt(i);
-                    stringBuilder.Append(item);
+                    stringBuilder.Append(((TextBlock)items.ValueAt(i)).Value);
                     stringBuilder.Append("\n");
                 }
                 textView.Text = stringBuilder.ToString();
