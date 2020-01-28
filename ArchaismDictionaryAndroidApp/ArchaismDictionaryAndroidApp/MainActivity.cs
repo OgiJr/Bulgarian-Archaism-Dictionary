@@ -2,7 +2,6 @@
 using Android.App;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
@@ -12,77 +11,71 @@ using Android.Util;
 using Android.Graphics;
 using Android.Support.V4.App;
 using Android;
-using static Android.Gms.Vision.Detector;
-using System.Text;
+using System.IO;
+using Google.Cloud.Vision.V1;
+using Google.Apis.Auth.OAuth2;
+using Google.Cloud.Storage.V1;
+using Grpc.Auth;
 
 namespace ArchaismDictionaryAndroidApp
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
-    public class MainActivity : AppCompatActivity, ISurfaceHolderCallback, IProcessor
+    public class MainActivity : AppCompatActivity, ISurfaceHolderCallback, CameraSource.IPictureCallback
     {
         private SurfaceView cameraView;
-        private TextView textView;
         private CameraSource cameraSource;
+        private ImageView imageView;
+        private Button button;
+        private TextView text;
         private const int requestCameraPermission = 1001;
-
+        public string result = "Не беше засечен текст";
+        GoogleCredential credentials;
+        StorageClient storage;
+        Grpc.Core.Channel channel;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
 
-            cameraView = FindViewById<SurfaceView>(Resource.Id.surface_view);
-            textView = FindViewById<TextView>(Resource.Id.text_view);
+            cameraView = FindViewById<SurfaceView>(Resource.Id.surfaceView);
+            imageView = FindViewById<ImageView>(Resource.Id.imageView);
+            button = FindViewById<Button>(Resource.Id.button);
+            text = FindViewById<TextView>(Resource.Id.text);
 
             TextRecognizer textRecognizer = new TextRecognizer.Builder(ApplicationContext).Build();
 
+            string path = "d576ac9cb652.json";
+            Stream stream = Application.Context.Assets.Open(path);
+
+            credentials = GoogleCredential.FromStream(stream);
+            storage = StorageClient.Create(credentials);
+            channel = new Grpc.Core.Channel(ImageAnnotatorClient.DefaultEndpoint.ToString(), credentials.ToChannelCredentials());
+            
             if (textRecognizer.IsOperational)
             {
                 cameraSource = new CameraSource.Builder(ApplicationContext, textRecognizer).
                     SetFacing(CameraFacing.Back).
                     SetRequestedPreviewSize(1280, 1024).
                     SetRequestedFps(2.0f).
-                    SetAutoFocusEnabled(true).Build();
+                    SetAutoFocusEnabled(true)
+                    .Build();
 
                 cameraView.Holder.AddCallback(this);
-                textRecognizer.SetProcessor(this);
+                imageView.Alpha = 0;
             }
             else
             {
-                Log.Error("Main Activity", "Имаше грешка при инициализирането на Google Vision");
+                Log.Error("Main Activity", "Имаше грешка при инициализирането на вашата камера.");
             }
 
-
-            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-
-            FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            fab.Click += FabOnClick;
+            button.Click += HandleClick;
         }
 
-        public override bool OnCreateOptionsMenu(IMenu menu)
+        private void HandleClick(object sender, EventArgs e)
         {
-            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
-            return true;
+            FreezeFrame();
         }
 
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            int id = item.ItemId;
-            if (id == Resource.Id.action_settings)
-            {
-                return true;
-            }
-
-            return base.OnOptionsItemSelected(item);
-        }
-
-        private void FabOnClick(object sender, EventArgs eventArgs)
-        {
-            View view = (View)sender;
-            Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
-                .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
-        }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -100,11 +93,11 @@ namespace ArchaismDictionaryAndroidApp
             }
         }
 
+        #region SurfaceManager
         public void SurfaceChanged(ISurfaceHolder holder, [GeneratedEnum] Format format, int width, int height)
         {
 
         }
-
         public void SurfaceCreated(ISurfaceHolder holder)
         {
             if (ActivityCompat.CheckSelfPermission(ApplicationContext, Manifest.Permission.Camera) != Android.Content.PM.Permission.Granted)
@@ -117,30 +110,65 @@ namespace ArchaismDictionaryAndroidApp
             }
             cameraSource.Start(cameraView.Holder);
         }
-
         public void SurfaceDestroyed(ISurfaceHolder holder)
         {
             cameraSource.Stop();
         }
 
-        public void ReceiveDetections(Detections detections)
-        {
-            SparseArray items = detections.DetectedItems;
-            textView.Post(() =>
-            {
-                StringBuilder stringBuilder = new StringBuilder();
-                for(int i = 0; i < items.Size(); i++)
-                {
-                    stringBuilder.Append(((TextBlock)items.ValueAt(i)).Value);
-                    stringBuilder.Append("\n");
-                }
-                textView.Text = stringBuilder.ToString();
-            });
-        }
-
         public void Release()
         {
-            throw new NotImplementedException();
+        }
+        #endregion
+
+        private string OCR(byte[] bytes)
+        {
+            var client = ImageAnnotatorClient.Create(channel);
+            var img = Google.Cloud.Vision.V1.Image.FromBytes(bytes);
+            var response = client.DetectText(img);
+
+            if (response != null)
+            {
+                result = "";
+                foreach (var annotation in response)
+                {
+                    if (annotation.Description != null)
+                    {
+                        result += annotation.Description + "\r\n";
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public void FreezeFrame()
+        {
+            cameraSource.TakePicture(null, this);
+        }
+
+        public void OnPictureTaken(byte[] data)
+        {
+            Bitmap loadedImage = null;
+            Bitmap bitmap = null;
+
+            loadedImage = BitmapFactory.DecodeByteArray(data, 0,
+                    data.Length);
+
+            Matrix rotateMatrix = new Matrix();
+            rotateMatrix.PostRotate(90f);
+            bitmap = Bitmap.CreateBitmap(loadedImage, 0, 0, loadedImage.Width, loadedImage.Height, rotateMatrix, false);
+
+            result = OCR(data);
+            text.Text = result;
+            SetImage(bitmap);
+        }
+
+        public void SetImage(Bitmap bitmap)
+        {
+            imageView.SetImageBitmap(bitmap);
+            imageView.Alpha = 255;
+            cameraView.Alpha = 0;
+
         }
     }
 }
