@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +37,16 @@ import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
 import com.ocr.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -123,7 +129,7 @@ public class HomeFragment extends Fragment {
                     visionBuilder.setVisionRequestInitializer(new VisionRequestInitializer("AIzaSyCFyaImwe0zX61cGo6GaBQTcSHGoIUTQHE"));
                     Vision vision = visionBuilder.build();
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
                     Image image = new Image();
                     image.encodeContent(byteArray);
@@ -134,13 +140,15 @@ public class HomeFragment extends Fragment {
                     annotateImageRequest.setFeatures(Collections.singletonList(feature));
                     BatchAnnotateImagesRequest batchAnnotateImagesRequest = new BatchAnnotateImagesRequest();
                     batchAnnotateImagesRequest.setRequests(Collections.singletonList(annotateImageRequest));
+                    BatchAnnotateImagesResponse batchAnnotateImagesResponse = null;
                     try {
-                        BatchAnnotateImagesResponse batchAnnotateImagesResponse = vision.images().annotate(batchAnnotateImagesRequest).execute();
-                        List<AnnotateImageResponse> annotateImageResponseList = batchAnnotateImagesResponse.getResponses();
-                        textView.setText(annotateImageResponseList.toString());
+                        batchAnnotateImagesResponse = vision.images().annotate(batchAnnotateImagesRequest).execute();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    List<AnnotateImageResponse> annotateImageResponseList = batchAnnotateImagesResponse.getResponses();
+                    Object fullTextAnnotation = annotateImageResponseList.get(0).get("fullTextAnnotation");
+                    //TODO do tuka e gotoovo posle se opravqai ako ima neshto pitai
                 }
             });
         }
