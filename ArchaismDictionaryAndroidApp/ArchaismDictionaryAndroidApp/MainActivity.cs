@@ -24,25 +24,26 @@ namespace ArchaismDictionaryAndroidApp
     {
         #region Variables 
 
-        #region UIVariables
+        #region MainScreenVariables
         private SurfaceView cameraView;
         private CameraSource cameraSource;
-        private ImageView imageView;
-        private Button button;
-        private TextView text;
+        private ImageView freezeFrameImage;
+        private Button captureButton;
+        private TextView resultText;
+        private Button unfreezeButton;
         #endregion
-        
+
         #region GoogleCredentialVariables
         GoogleCredential credentials;
         StorageClient storage;
         Grpc.Core.Channel channel;
         #endregion
-        
+
         #region OCRVariables
         private const int requestCameraPermission = 1001;
         public string result;
         #endregion
-        
+
         #endregion
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -53,28 +54,60 @@ namespace ArchaismDictionaryAndroidApp
             AssignUIVariables();
             CreateGoogleCredentials();
             CreateCameraSource();
-
-            button.Click += TakePicture;
         }
         
         #region UIManager
     
         private void AssignUIVariables()
         {
-            cameraView = FindViewById<SurfaceView>(Resource.Id.surfaceView);
-            imageView = FindViewById<ImageView>(Resource.Id.imageView);
-            button = FindViewById<Button>(Resource.Id.button);
-            text = FindViewById<TextView>(Resource.Id.text);
+            cameraView = FindViewById<SurfaceView>(Resource.Id.cameraView);
+            freezeFrameImage = FindViewById<ImageView>(Resource.Id.freezeframeView);
+            captureButton = FindViewById<Button>(Resource.Id.captureButton);
+            resultText = FindViewById<TextView>(Resource.Id.resultText);
+            unfreezeButton = FindViewById<Button>(Resource.Id.unfreezeButton);
+
+            captureButton.Click += TakePicture;
+            unfreezeButton.Click += UnfreezeFrame;
+
+            unfreezeButton.Enabled = false;
+            unfreezeButton.Alpha = 0;
+            resultText.Enabled = false;
+            resultText.Alpha = 0;
         }
-        
+
         private void TakePicture(object sender, EventArgs e)
         {
-            FreezeFrame();
+            cameraSource.TakePicture(null, this);
         }
+
+        private void UnfreezeFrame(object sender, EventArgs e)
+        {
+            captureButton.Enabled = true;
+            cameraView.Enabled = true;
+
+            unfreezeButton.Enabled = false;
+            unfreezeButton.Alpha = 0;
+            resultText.Enabled = false;
+            unfreezeButton.Alpha = 0;
+            freezeFrameImage.Enabled = false;
+            unfreezeButton.Alpha = 0;
+        }
+
+        private void FreezeFrame(Bitmap bitmap)
+        {
+            freezeFrameImage.SetImageBitmap(bitmap);
+            freezeFrameImage.Enabled = true;
+
+            cameraView.Enabled = false;
+            cameraView.Alpha = 0;
+            captureButton.Enabled = false;
+            captureButton.Alpha = 0;
+        }
+
         #endregion
 
         #region Credentials
-        
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -146,7 +179,7 @@ namespace ArchaismDictionaryAndroidApp
                     .Build();
 
                 cameraView.Holder.AddCallback(this);
-                imageView.Alpha = 0;
+                freezeFrameImage.Alpha = 0;
             }
             else
             {
@@ -161,8 +194,7 @@ namespace ArchaismDictionaryAndroidApp
         {
             var client = ImageAnnotatorClient.Create(channel);
             var img = Google.Cloud.Vision.V1.Image.FromBytes(bytes);
-            var response = client.DetectText(   img);
-
+            var response = client.DetectText(img);
             if (response != null)
             {
                 result = "";
@@ -178,11 +210,6 @@ namespace ArchaismDictionaryAndroidApp
             return result;
         }
 
-        private void FreezeFrame()
-        {
-            cameraSource.TakePicture(null, this);
-        }
-
         public void OnPictureTaken(byte[] data)
         {
             Bitmap loadedImage = null;
@@ -196,16 +223,8 @@ namespace ArchaismDictionaryAndroidApp
             bitmap = Bitmap.CreateBitmap(loadedImage, 0, 0, loadedImage.Width, loadedImage.Height, rotateMatrix, false);
 
             result = OCR(data);
-            text.Text = result;
-            SetImage(bitmap);
-        }
-
-        private void SetImage(Bitmap bitmap)
-        {
-            imageView.SetImageBitmap(bitmap);
-            imageView.Alpha = 255;
-            cameraView.Alpha = 0;
-
+            resultText.Text = result;
+            FreezeFrame(bitmap);
         }
         #endregion
     }
