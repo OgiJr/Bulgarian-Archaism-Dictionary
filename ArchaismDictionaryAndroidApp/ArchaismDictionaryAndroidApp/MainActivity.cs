@@ -42,22 +42,33 @@ namespace ArchaismDictionaryAndroidApp
         #region OCRVariables
         private const int requestCameraPermission = 1001;
         public string result;
+        private byte numberOfWords = 0;
         #endregion
 
+        public static string[,] dataBase = { { "архаизъм", "дума със старинен произход" }, { "игото", "робството" }, {"X","Xamarin" } };
         #endregion
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
-            
+
             AssignUIVariables();
             CreateGoogleCredentials();
             CreateCameraSource();
         }
-        
+
+        public byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, imageIn.RawFormat);
+                return ms.ToArray();
+            }
+        }
+
         #region UIManager
-    
+
         private void AssignUIVariables()
         {
             cameraView = FindViewById<SurfaceView>(Resource.Id.cameraView);
@@ -71,6 +82,7 @@ namespace ArchaismDictionaryAndroidApp
 
             unfreezeButton.Enabled = false;
             unfreezeButton.Alpha = 0;
+            freezeFrameImage.Enabled = false;
             resultText.Enabled = false;
             resultText.Alpha = 0;
         }
@@ -95,13 +107,16 @@ namespace ArchaismDictionaryAndroidApp
 
         private void FreezeFrame(Bitmap bitmap)
         {
-            freezeFrameImage.SetImageBitmap(bitmap);
             freezeFrameImage.Enabled = true;
+            freezeFrameImage.SetImageBitmap(bitmap);
+            freezeFrameImage.Alpha = 256;
 
-            cameraView.Enabled = false;
+            unfreezeButton.Enabled = true;
+            unfreezeButton.Alpha = 256;
+
             cameraView.Alpha = 0;
-            captureButton.Enabled = false;
             captureButton.Alpha = 0;
+            captureButton.Enabled = false;
         }
 
         #endregion
@@ -124,7 +139,7 @@ namespace ArchaismDictionaryAndroidApp
                     break;
             }
         }
-        
+
         public void CreateGoogleCredentials()
         {
             string path = "d576ac9cb652.json";
@@ -137,7 +152,7 @@ namespace ArchaismDictionaryAndroidApp
         #endregion
 
         #region SurfaceManager
-        
+
         public void SurfaceChanged(ISurfaceHolder holder, [GeneratedEnum] Format format, int width, int height)
         {
 
@@ -155,16 +170,16 @@ namespace ArchaismDictionaryAndroidApp
             }
             cameraSource.Start(cameraView.Holder);
         }
-        
+
         public void SurfaceDestroyed(ISurfaceHolder holder)
         {
             cameraSource.Stop();
         }
-        
+
         public void Release()
         {
         }
-        
+
         public void CreateCameraSource()
         {
             TextRecognizer textRecognizer = new TextRecognizer.Builder(ApplicationContext).Build();
@@ -186,7 +201,7 @@ namespace ArchaismDictionaryAndroidApp
                 Log.Error("Main Activity", "Имаше грешка при инициализирането на вашата камера.");
             }
         }
-        
+
         #endregion
 
         #region OCR
@@ -195,15 +210,25 @@ namespace ArchaismDictionaryAndroidApp
             var client = ImageAnnotatorClient.Create(channel);
             var img = Google.Cloud.Vision.V1.Image.FromBytes(bytes);
             var response = client.DetectText(img);
+
+            result = "";
+            string[] detectedWords = new string[99];
+
+            numberOfWords = 0;
+
             if (response != null)
             {
-                result = "";
-                foreach (var annotation in response)
+                for (int i = 0; i < response.Count; i++)
                 {
-                    if (annotation.Description != null)
+                    if (response[i].Description != null)
                     {
-                        result += annotation.Description + "\r\n";
+                        numberOfWords++;
+                        detectedWords[i] = response[i].Description;
                     }
+                }
+                if (numberOfWords > 0)
+                {
+                    result = FindWordsInDataBase(detectedWords);
                 }
             }
 
@@ -215,8 +240,7 @@ namespace ArchaismDictionaryAndroidApp
             Bitmap loadedImage = null;
             Bitmap bitmap = null;
 
-            loadedImage = BitmapFactory.DecodeByteArray(data, 0,
-                    data.Length);
+            loadedImage = BitmapFactory.DecodeByteArray(data, 0, data.Length);
 
             Matrix rotateMatrix = new Matrix();
             rotateMatrix.PostRotate(90f);
@@ -224,7 +248,72 @@ namespace ArchaismDictionaryAndroidApp
 
             result = OCR(data);
             resultText.Text = result;
-            FreezeFrame(bitmap);
+
+            if (numberOfWords > 0)
+            {
+                FreezeFrame(bitmap);
+            }
+        }
+        #endregion
+
+        #region DictionaryManager
+        public static string FindWordsInDataBase(string[] input)
+        {
+            string final = "";
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                input[i] = input[i].ToLower();
+            }
+
+            foreach (string word in input)
+            {
+                for (int i = 0; i < dataBase.Length / 2; i++)
+                {
+                    if (word == dataBase[i, 0])
+                    {
+                        final = dataBase[i, 0] + " - " + dataBase[i, 1] + ".";
+                    }
+                    else
+                    {
+                        char[] wordOne = word.ToCharArray();
+                        char[] wordTwo = dataBase[i, 0].ToCharArray();
+
+                        if (wordOne.Length > 4 && wordTwo.Length > 4)
+                        {
+                            int difference = 0;
+
+                            if (wordOne.Length < wordTwo.Length)
+                            {
+                                for (int j = 0; j < wordOne.Length; j++)
+                                {
+                                    if (wordOne[j] != wordTwo[j])
+                                    {
+                                        difference++;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j < wordTwo.Length; j++)
+                                {
+                                    if (wordOne[j] != wordTwo[j])
+                                    {
+                                        difference++;
+                                    }
+                                }
+                            }
+
+                            if (difference < 3)
+                            {
+                                final = dataBase[i, 0] + " - " + dataBase[i, 1] + ".";
+                            }
+                        }
+                    }
+                }
+            }
+
+            return final;
         }
         #endregion
     }
