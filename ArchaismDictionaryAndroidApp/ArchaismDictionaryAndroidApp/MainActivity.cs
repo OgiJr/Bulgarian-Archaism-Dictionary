@@ -42,10 +42,9 @@ namespace ArchaismDictionaryAndroidApp
         #region OCRVariables
         private const int requestCameraPermission = 1001;
         public string result;
-        private byte numberOfWords = 0;
         #endregion
 
-        public static string[,] dataBase = { { "архаизъм", "дума със старинен произход" }, { "игото", "робството" }, {"X","Xamarin" } };
+        public static string[,] dataBase = { { "архаизъм", "дума със старинен произход" }, { "игото", "робството" }};
         #endregion
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -212,23 +211,15 @@ namespace ArchaismDictionaryAndroidApp
             var response = client.DetectText(img);
 
             result = "";
-            string[] detectedWords = new string[99];
-
-            numberOfWords = 0;
 
             if (response != null)
             {
-                for (int i = 0; i < response.Count; i++)
+                foreach (var annotation in response)
                 {
-                    if (response[i].Description != null)
+                    if (annotation.Description != null)
                     {
-                        numberOfWords++;
-                        detectedWords[i] = response[i].Description;
+                        result = FindWordInDatabase(annotation.Description);
                     }
-                }
-                if (numberOfWords > 0)
-                {
-                    result = FindWordsInDataBase(detectedWords);
                 }
             }
 
@@ -249,7 +240,7 @@ namespace ArchaismDictionaryAndroidApp
             result = OCR(data);
             resultText.Text = result;
 
-            if (numberOfWords > 0)
+            if (result != "")
             {
                 FreezeFrame(bitmap);
             }
@@ -257,57 +248,51 @@ namespace ArchaismDictionaryAndroidApp
         #endregion
 
         #region DictionaryManager
-        public static string FindWordsInDataBase(string[] input)
+        public static string FindWordInDatabase(string input)
         {
             string final = "";
 
-            for (int i = 0; i < input.Length; i++)
-            {
-                input[i] = input[i].ToLower();
-            }
+            input = input.ToLower();
 
-            foreach (string word in input)
+            for (int i = 0; i < dataBase.Length / 2; i++)
             {
-                for (int i = 0; i < dataBase.Length / 2; i++)
+                if (input == dataBase[i, 0])
                 {
-                    if (word == dataBase[i, 0])
-                    {
-                        final = dataBase[i, 0] + " - " + dataBase[i, 1] + ".";
-                    }
-                    else
-                    {
-                        char[] wordOne = word.ToCharArray();
-                        char[] wordTwo = dataBase[i, 0].ToCharArray();
+                    final = dataBase[i, 0] + " - " + dataBase[i, 1] + ".";
+                }
+                else
+                {
+                    char[] wordOne = input.ToCharArray();
+                    char[] wordTwo = dataBase[i, 0].ToCharArray();
 
-                        if (wordOne.Length > 4 && wordTwo.Length > 4)
+                    if (wordOne.Length > 4 && wordTwo.Length > 4)
+                    {
+                        int difference = 0;
+
+                        if (wordOne.Length < wordTwo.Length)
                         {
-                            int difference = 0;
-
-                            if (wordOne.Length < wordTwo.Length)
+                            for (int j = 0; j < wordOne.Length; j++)
                             {
-                                for (int j = 0; j < wordOne.Length; j++)
+                                if (wordOne[j] != wordTwo[j])
                                 {
-                                    if (wordOne[j] != wordTwo[j])
-                                    {
-                                        difference++;
-                                    }
+                                    difference++;
                                 }
                             }
-                            else
+                        }
+                        else
+                        {
+                            for (int j = 0; j < wordTwo.Length; j++)
                             {
-                                for (int j = 0; j < wordTwo.Length; j++)
+                                if (wordOne[j] != wordTwo[j])
                                 {
-                                    if (wordOne[j] != wordTwo[j])
-                                    {
-                                        difference++;
-                                    }
+                                    difference++;
                                 }
                             }
+                        }
 
-                            if (difference < 3)
-                            {
-                                final = dataBase[i, 0] + " - " + dataBase[i, 1] + ".";
-                            }
+                        if (difference < 3)
+                        {
+                            final = dataBase[i, 0] + " - " + dataBase[i, 1] + ".";
                         }
                     }
                 }
