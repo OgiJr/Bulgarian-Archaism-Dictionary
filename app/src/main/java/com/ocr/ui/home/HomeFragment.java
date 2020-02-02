@@ -69,6 +69,8 @@ public class HomeFragment extends Fragment {
 
     private String currentPhotoPath;
 
+    private CharSequence charSequence;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -148,8 +150,8 @@ public class HomeFragment extends Fragment {
                     }
                     List<AnnotateImageResponse> annotateImageResponseList = batchAnnotateImagesResponse.getResponses();
                     ArrayMap<String, String> arrayMap = (com.google.api.client.util.ArrayMap<String, String>)annotateImageResponseList.get(0).get("fullTextAnnotation");
-                    textView.setText(arrayMap.get("text").subSequence(0, arrayMap.get("text").length()));
-                    //TODO do tuka e gotoovo posle se opravqai ako ima neshto pitai
+                    charSequence = arrayMap.get("text").subSequence(0, arrayMap.get("text").length());
+                    System.out.println(charSequence);
                 }
             });
         }
