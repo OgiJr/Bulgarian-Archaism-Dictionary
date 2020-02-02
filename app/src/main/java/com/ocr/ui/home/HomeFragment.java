@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +26,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.util.ArrayMap;
 import com.google.api.services.vision.v1.Vision;
 import com.google.api.services.vision.v1.VisionRequestInitializer;
 import com.google.api.services.vision.v1.model.AnnotateImageRequest;
@@ -59,13 +59,13 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
+    TextView textView;
+
     private static final int REQUEST_TAKE_PHOTO = 1;
 
     private Button button;
 
     private ImageView imageView;
-
-    private TextView textView;
 
     private String currentPhotoPath;
 
@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
+        textView = root.findViewById(R.id.text_home);
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -147,7 +147,8 @@ public class HomeFragment extends Fragment {
                         e.printStackTrace();
                     }
                     List<AnnotateImageResponse> annotateImageResponseList = batchAnnotateImagesResponse.getResponses();
-                    Object fullTextAnnotation = annotateImageResponseList.get(0).get("fullTextAnnotation");
+                    ArrayMap<String, String> arrayMap = (com.google.api.client.util.ArrayMap<String, String>)annotateImageResponseList.get(0).get("fullTextAnnotation");
+                    textView.setText(arrayMap.get("text").subSequence(0, arrayMap.get("text").length()));
                     //TODO do tuka e gotoovo posle se opravqai ako ima neshto pitai
                 }
             });
