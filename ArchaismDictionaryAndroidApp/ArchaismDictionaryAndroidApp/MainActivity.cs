@@ -16,6 +16,7 @@ using Google.Cloud.Vision.V1;
 using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Storage.V1;
 using Grpc.Auth;
+using System.Linq;
 
 namespace ArchaismDictionaryAndroidApp
 {
@@ -94,7 +95,8 @@ namespace ArchaismDictionaryAndroidApp
         private void UnfreezeFrame(object sender, EventArgs e)
         {
             captureButton.Enabled = true;
-            cameraView.Enabled = true;
+            captureButton.Alpha = 256;
+            cameraView.Alpha = 256;
 
             unfreezeButton.Enabled = false;
             unfreezeButton.Alpha = 0;
@@ -102,6 +104,8 @@ namespace ArchaismDictionaryAndroidApp
             unfreezeButton.Alpha = 0;
             freezeFrameImage.Enabled = false;
             unfreezeButton.Alpha = 0;
+            resultText.Enabled = false;
+            resultText.Alpha = 0;
         }
 
         private void FreezeFrame(Bitmap bitmap)
@@ -116,6 +120,10 @@ namespace ArchaismDictionaryAndroidApp
             cameraView.Alpha = 0;
             captureButton.Alpha = 0;
             captureButton.Enabled = false;
+
+            resultText.Enabled = true;
+            resultText.Alpha = 256;
+            resultText.Text = result;
         }
 
         #endregion
@@ -238,7 +246,6 @@ namespace ArchaismDictionaryAndroidApp
             bitmap = Bitmap.CreateBitmap(loadedImage, 0, 0, loadedImage.Width, loadedImage.Height, rotateMatrix, false);
 
             result = OCR(data);
-            resultText.Text = result;
 
             if (result != "")
             {
@@ -250,7 +257,7 @@ namespace ArchaismDictionaryAndroidApp
         #region DictionaryManager
         public static string FindWordInDatabase(string input)
         {
-            string final = "";
+            string final = string.Empty;
 
             input = input.ToLower();
 
@@ -258,7 +265,7 @@ namespace ArchaismDictionaryAndroidApp
             {
                 if (input == dataBase[i, 0])
                 {
-                    final = dataBase[i, 0] + " - " + dataBase[i, 1] + ".";
+                    final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
                 }
                 else
                 {
@@ -292,7 +299,7 @@ namespace ArchaismDictionaryAndroidApp
 
                         if (difference < 3)
                         {
-                            final = dataBase[i, 0] + " - " + dataBase[i, 1] + ".";
+                            final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i,0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
                         }
                     }
                 }
