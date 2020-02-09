@@ -25,7 +25,8 @@
         android:text = "Засечен текст"
         android:textSize = "24dp"
         android:background = "#FFFFFF"
-        android:textColor = "@android:color/black"/>
+        android:textColor = "@android:color/black"
+        android:gravity = "center_horizontal"/>
 
     <Button
         android:id = "@+id/captureButton"
@@ -53,5 +54,12 @@
         android:layout_alignParentLeft = "true"
         android:layout_alignParentTop = "true"
         android:text = "Unfreeze" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity = "center"
+        android:background = "#FFFFFF"
+        android:id = "@+id/errorText"/>
 
 </RelativeLayout>

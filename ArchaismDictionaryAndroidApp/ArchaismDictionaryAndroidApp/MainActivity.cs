@@ -17,11 +17,14 @@ using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Storage.V1;
 using Grpc.Auth;
 using System.Linq;
+using ArchaismDictionaryAndroidApp.Network;
+using Android.Net;
+using Android.Content;
 
 namespace ArchaismDictionaryAndroidApp
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
-    public class MainActivity : AppCompatActivity, ISurfaceHolderCallback, CameraSource.IPictureCallback
+    public class MainActivity : AppCompatActivity, ISurfaceHolderCallback, CameraSource.IPictureCallback, INetworkConnection
     {
         #region Variables 
 
@@ -32,6 +35,7 @@ namespace ArchaismDictionaryAndroidApp
         private Button captureButton;
         private TextView resultText;
         private Button unfreezeButton;
+        private TextView errorScreen;
         #endregion
 
         #region GoogleCredentialVariables
@@ -45,7 +49,12 @@ namespace ArchaismDictionaryAndroidApp
         public string result;
         #endregion
 
+        #region NetworkVariables
         public static string[,] dataBase = { { "архаизъм", "дума със старинен произход" }, { "игото", "робството" }};
+
+        public bool isConnected { get; set; }
+        #endregion
+        
         #endregion
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -53,19 +62,47 @@ namespace ArchaismDictionaryAndroidApp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
 
+            CheckConnection();
             AssignUIVariables();
-            CreateGoogleCredentials();
-            CreateCameraSource();
+
+            if (isConnected == true)
+            {
+                RemoveErrorScreen();
+                CreateGoogleCredentials();
+                CreateCameraSource();
+            }
+            else
+            {
+                NetworkErrorScreen();
+            }
+
         }
 
-        public byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        #region NetworkManager
+        
+        public void CheckConnection()
         {
-            using (var ms = new MemoryStream())
+            var connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+            var activeNetworking = connectivityManager.ActiveNetworkInfo;
+
+            if(activeNetworking != null && activeNetworking.IsConnected == true)
             {
-                imageIn.Save(ms, imageIn.RawFormat);
-                return ms.ToArray();
+                isConnected = true;
+            }
+
+            else
+            {
+                isConnected = false;
             }
         }
+
+        private void NetworkErrorScreen()
+        {
+            ErrorScreen();
+            errorScreen.Text = "Моля свържете се към интернет";
+        }
+
+        #endregion
 
         #region UIManager
 
@@ -76,6 +113,7 @@ namespace ArchaismDictionaryAndroidApp
             captureButton = FindViewById<Button>(Resource.Id.captureButton);
             resultText = FindViewById<TextView>(Resource.Id.resultText);
             unfreezeButton = FindViewById<Button>(Resource.Id.unfreezeButton);
+            errorScreen = FindViewById<TextView>(Resource.Id.errorText);
 
             captureButton.Click += TakePicture;
             unfreezeButton.Click += UnfreezeFrame;
@@ -124,6 +162,38 @@ namespace ArchaismDictionaryAndroidApp
             resultText.Enabled = true;
             resultText.Alpha = 256;
             resultText.Text = result;
+        }
+
+        private void ErrorScreen()
+        {
+            errorScreen.Enabled = true;
+            errorScreen.Alpha = 256;
+
+            cameraView.Enabled = false;
+            cameraView.Alpha = 0;
+            freezeFrameImage.Enabled = false;
+            freezeFrameImage.Alpha = 0;
+            captureButton.Enabled = false;
+            captureButton.Alpha = 0;
+            resultText.Enabled = false;
+            resultText.Alpha = 0;
+            unfreezeButton.Enabled = false;
+            unfreezeButton.Alpha = 0;
+        }
+
+        private void RemoveErrorScreen()
+        {
+            cameraView.Enabled = true;
+            cameraView.Alpha = 256;
+            captureButton.Enabled = true;
+            captureButton.Alpha = 256;
+
+            unfreezeButton.Enabled = false;
+            unfreezeButton.Alpha = 0;
+            freezeFrameImage.Enabled = false;
+            freezeFrameImage.Alpha = 0;
+            resultText.Enabled = false;
+            resultText.Alpha = 0;
         }
 
         #endregion
@@ -308,5 +378,6 @@ namespace ArchaismDictionaryAndroidApp
             return final;
         }
         #endregion
+
     }
 }
