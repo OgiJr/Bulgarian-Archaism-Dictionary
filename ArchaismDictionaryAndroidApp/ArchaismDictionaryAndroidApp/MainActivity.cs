@@ -123,6 +123,8 @@ namespace ArchaismDictionaryAndroidApp
             freezeFrameImage.Enabled = false;
             resultText.Enabled = false;
             resultText.Alpha = 0;
+            errorScreen.Enabled = false;
+            errorScreen.Alpha = 0;
         }
 
         private void TakePicture(object sender, EventArgs e)
