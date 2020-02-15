@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/navigation_ocr"
-        android:title="OCR" />
+  <item
+      android:id="@+id/navigation_ocr"
+      android:title="Сканирай дума"
+android:icon ="@drawable/ocr"/>
 
-    <item
-        android:id="@+id/navigation_dictionary"
-        android:title="Dictionary" />
+  <item
+      android:id="@+id/navigation_dictionary"
+      android:title="Потърси дума"
+android:icon ="@drawable/search"/>
 
-    <item
-        android:id="@+id/navigation_literature"
-        android:title="Literature" />
+  <item
+      android:id="@+id/navigation_literature"
+      android:title="Произведения"
+android:icon ="@drawable/literature"/>
 
 </menu>

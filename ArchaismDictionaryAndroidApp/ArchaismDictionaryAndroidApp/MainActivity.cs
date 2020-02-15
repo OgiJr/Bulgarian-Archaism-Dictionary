@@ -20,10 +20,11 @@ using System.Linq;
 using ArchaismDictionaryAndroidApp.Network;
 using Android.Net;
 using Android.Content;
+using System.Drawing;
 
 namespace ArchaismDictionaryAndroidApp
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Icon = "@drawable/AppLogo", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity, ISurfaceHolderCallback, CameraSource.IPictureCallback, INetworkConnection
     {
         #region Variables 
@@ -32,10 +33,11 @@ namespace ArchaismDictionaryAndroidApp
         private SurfaceView cameraView;
         private CameraSource cameraSource;
         private ImageView freezeFrameImage;
-        private Button captureButton;
         private TextView resultText;
-        private Button unfreezeButton;
         private TextView errorScreen;
+        private ImageButton captureButton;
+        private ImageButton unfreezeButton;
+        private Button retry;
         #endregion
 
         #region GoogleCredentialVariables
@@ -47,19 +49,21 @@ namespace ArchaismDictionaryAndroidApp
         #region OCRVariables
         private const int requestCameraPermission = 1001;
         public string result;
+        public System.Drawing.Image editedImage;
         #endregion
 
         #region NetworkVariables
-        public static string[,] dataBase = { { "архаизъм", "дума със старинен произход" }, { "игото", "робството" }};
+        public static string[,] dataBase = { { "архаизъм", "дума със старинен произход" }, { "игото", "робството" } };
 
         public bool isConnected { get; set; }
         #endregion
-        
+
         #endregion
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
             SetContentView(Resource.Layout.activity_main);
 
             CheckConnection();
@@ -67,7 +71,6 @@ namespace ArchaismDictionaryAndroidApp
 
             if (isConnected == true)
             {
-                RemoveErrorScreen();
                 CreateGoogleCredentials();
                 CreateCameraSource();
             }
@@ -79,13 +82,13 @@ namespace ArchaismDictionaryAndroidApp
         }
 
         #region NetworkManager
-        
+
         public void CheckConnection()
         {
             var connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
             var activeNetworking = connectivityManager.ActiveNetworkInfo;
 
-            if(activeNetworking != null && activeNetworking.IsConnected == true)
+            if (activeNetworking != null && activeNetworking.IsConnected == true)
             {
                 isConnected = true;
             }
@@ -110,13 +113,15 @@ namespace ArchaismDictionaryAndroidApp
         {
             cameraView = FindViewById<SurfaceView>(Resource.Id.cameraView);
             freezeFrameImage = FindViewById<ImageView>(Resource.Id.freezeframeView);
-            captureButton = FindViewById<Button>(Resource.Id.captureButton);
+            captureButton = FindViewById<ImageButton>(Resource.Id.captureButton);
             resultText = FindViewById<TextView>(Resource.Id.resultText);
-            unfreezeButton = FindViewById<Button>(Resource.Id.unfreezeButton);
+            unfreezeButton = FindViewById<ImageButton>(Resource.Id.unfreezeButton);
             errorScreen = FindViewById<TextView>(Resource.Id.errorText);
+            retry = FindViewById<Button>(Resource.Id.retry);
 
             captureButton.Click += TakePicture;
             unfreezeButton.Click += UnfreezeFrame;
+            retry.Click += RemoveErrorScreen;
 
             unfreezeButton.Enabled = false;
             unfreezeButton.Alpha = 0;
@@ -125,6 +130,17 @@ namespace ArchaismDictionaryAndroidApp
             resultText.Alpha = 0;
             errorScreen.Enabled = false;
             errorScreen.Alpha = 0;
+            retry.Enabled = false;
+            retry.Alpha = 0;
+
+            FontDesign();
+        }
+
+        private void FontDesign()
+        {
+            var appFont = Typeface.CreateFromAsset(ApplicationContext.Assets, "Roboto-Regular.ttf");
+            resultText.Typeface = appFont;
+            errorScreen.Typeface = appFont;
         }
 
         private void TakePicture(object sender, EventArgs e)
@@ -148,7 +164,7 @@ namespace ArchaismDictionaryAndroidApp
             resultText.Alpha = 0;
         }
 
-        private void FreezeFrame(Bitmap bitmap)
+        private void FreezeFrame(Android.Graphics.Bitmap bitmap)
         {
             freezeFrameImage.Enabled = true;
             freezeFrameImage.SetImageBitmap(bitmap);
@@ -170,6 +186,8 @@ namespace ArchaismDictionaryAndroidApp
         {
             errorScreen.Enabled = true;
             errorScreen.Alpha = 256;
+            retry.Enabled = true;
+            retry.Alpha = 256;
 
             cameraView.Enabled = false;
             cameraView.Alpha = 0;
@@ -183,8 +201,11 @@ namespace ArchaismDictionaryAndroidApp
             unfreezeButton.Alpha = 0;
         }
 
-        private void RemoveErrorScreen()
+        private void RemoveErrorScreen(object sender, EventArgs e)
         {
+            CreateGoogleCredentials();
+            CreateCameraSource();
+
             cameraView.Enabled = true;
             cameraView.Alpha = 256;
             captureButton.Enabled = true;
@@ -196,6 +217,23 @@ namespace ArchaismDictionaryAndroidApp
             freezeFrameImage.Alpha = 0;
             resultText.Enabled = false;
             resultText.Alpha = 0;
+            retry.Enabled = false;
+            retry.Alpha = 0;
+            errorScreen.Enabled = false;
+            errorScreen.Alpha = 0;
+
+        }
+
+        private System.Drawing.Image HighlightWord(byte[] bytes, Google.Cloud.Vision.V1.EntityAnnotation entityAnnotation)
+        {
+            var ms = new MemoryStream(bytes);
+
+            using var image = System.Drawing.Image.FromStream(ms);
+            using Graphics g = Graphics.FromImage(image);
+            System.Drawing.Color highlightColor = System.Drawing.Color.FromArgb(50, System.Drawing.Color.Yellow);
+            SolidBrush shadowBrush = new SolidBrush(highlightColor);
+            g.FillPolygon(shadowBrush, entityAnnotation.BoundingPoly.Vertices.Select((vertex) => new System.Drawing.Point(vertex.X, vertex.Y)).ToArray());
+            return image;
         }
 
         #endregion
@@ -290,7 +328,7 @@ namespace ArchaismDictionaryAndroidApp
             var img = Google.Cloud.Vision.V1.Image.FromBytes(bytes);
             var response = client.DetectText(img);
 
-            result = "";
+            result = string.Empty;
 
             if (response != null)
             {
@@ -299,6 +337,13 @@ namespace ArchaismDictionaryAndroidApp
                     if (annotation.Description != null)
                     {
                         result = FindWordInDatabase(annotation.Description);
+
+                        if (annotation.Description == result && result != string.Empty)
+                        {
+                            editedImage = HighlightWord(bytes, annotation);
+                            break;
+                        }
+
                     }
                 }
             }
@@ -306,22 +351,38 @@ namespace ArchaismDictionaryAndroidApp
             return result;
         }
 
+        public byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        {
+            using var ms = new MemoryStream();
+            imageIn.Save(ms, imageIn.RawFormat);
+            return ms.ToArray();
+        }
+
         public void OnPictureTaken(byte[] data)
         {
-            Bitmap loadedImage = null;
-            Bitmap bitmap = null;
-
-            loadedImage = BitmapFactory.DecodeByteArray(data, 0, data.Length);
-
-            Matrix rotateMatrix = new Matrix();
-            rotateMatrix.PostRotate(90f);
-            bitmap = Bitmap.CreateBitmap(loadedImage, 0, 0, loadedImage.Width, loadedImage.Height, rotateMatrix, false);
-
-            result = OCR(data);
-
-            if (result != "")
+            if (isConnected == true)
             {
-                FreezeFrame(bitmap);
+                result = OCR(data);
+
+                if (result != string.Empty)
+                {
+                    Android.Graphics.Bitmap loadedImage;
+                    Android.Graphics.Bitmap bitmap;
+
+                    byte[] newData = ImageToByteArray(editedImage);
+
+                    loadedImage = BitmapFactory.DecodeByteArray(newData, 0, newData.Length);
+
+                    Matrix rotateMatrix = new Matrix();
+                    rotateMatrix.PostRotate(90f);
+                    bitmap = Android.Graphics.Bitmap.CreateBitmap(loadedImage, 0, 0, loadedImage.Width, loadedImage.Height, rotateMatrix, false);
+
+                    FreezeFrame(bitmap);
+                }
+            }
+            else
+            {
+                NetworkErrorScreen();
             }
         }
         #endregion
@@ -371,7 +432,7 @@ namespace ArchaismDictionaryAndroidApp
 
                         if (difference < 3)
                         {
-                            final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i,0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
+                            final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
                         }
                     }
                 }

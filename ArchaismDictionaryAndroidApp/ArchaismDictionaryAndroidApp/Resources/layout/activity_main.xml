@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:gif = "https://github.com/XamlAnimatedGif/WpfAnimatedGif"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,8 +14,8 @@
 
     <SurfaceView
         android:id = "@+id/cameraView"
-        android:layout_width="500dp"
-        android:layout_height="match_parent"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <TextView
         android:id = "@+id/resultText"
@@ -28,14 +29,24 @@
         android:textColor = "@android:color/black"
         android:gravity = "center_horizontal"/>
 
-    <Button
+    <ImageView
+        android:id = "@+id/loading"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent = "true"
+        android:background="@null"/>
+
+    <ImageButton
         android:id = "@+id/captureButton"
-        android:layout_width="140dp"
-        android:layout_height="70dp"
+        android:layout_width= "match_parent"
+        android:layout_height="150dp"
         android:layout_above="@+id/navigation"
         android:layout_centerHorizontal = "true"
-        android:text = "Снимка"
-        android:gravity = "center"/>
+        android:gravity = "center"
+        android:src = "@drawable/capture"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:foregroundGravity = "bottom" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -45,21 +56,44 @@
         android:layout_marginStart="0dp"
         android:background = "#8FC1D2"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/navigation"/>
+        app:menu="@menu/navigation"
+        app:itemTextColor = "@android:color/white"
+        app:itemIconTint = "@android:color/white"/>
 
-    <Button
+    <ImageButton
         android:id = "@+id/unfreezeButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft = "true"
-        android:layout_alignParentTop = "true"
-        android:text = "Unfreeze" />
+        android:layout_alignParentTop ="true"
+        android:src = "@drawable/back"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        />
 
     <TextView
+        android:id = "@+id/errorText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity = "center"
-        android:background = "#FFFFFF"
-        android:id = "@+id/errorText"/>
+        android:gravity = "center_horizontal"
+        android:background = "#FFFFFF"/>
+
+    <Button
+        android:id = "@+id/retry"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent = "true"
+        android:text = "Unfreeze"
+        android:textColor = "@android:color/white"
+        android:background = "#8FC1D2"/>
+
+    <ImageView
+        android:id = "@+id/load"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        gif:AnimationBehaviour.SourceUri = "@drawable/loading"
+        android:background = "@null"
+        android:layout_centerInParent = "false"/>
 
 </RelativeLayout>
