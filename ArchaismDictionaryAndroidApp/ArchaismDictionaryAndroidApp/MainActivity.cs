@@ -20,7 +20,7 @@ using System.Linq;
 using ArchaismDictionaryAndroidApp.Network;
 using Android.Net;
 using Android.Content;
-using System.Drawing;
+using SkiaSharp;
 
 namespace ArchaismDictionaryAndroidApp
 {
@@ -49,7 +49,7 @@ namespace ArchaismDictionaryAndroidApp
         #region OCRVariables
         private const int requestCameraPermission = 1001;
         public string result;
-        public System.Drawing.Image editedImage;
+        public SKBitmap editedImage;
         #endregion
 
         #region NetworkVariables
@@ -224,16 +224,20 @@ namespace ArchaismDictionaryAndroidApp
 
         }
 
-        private System.Drawing.Image HighlightWord(byte[] bytes, Google.Cloud.Vision.V1.EntityAnnotation entityAnnotation)
+        private SKBitmap HighlightWord(byte[] bytes, Google.Cloud.Vision.V1.EntityAnnotation entityAnnotation)
         {
             var ms = new MemoryStream(bytes);
+            
+            SKBitmap bitmap = SKBitmap.Decode(ms);
+            var canvas = new SKCanvas(bitmap);
+            
+            SKPaint skPaint = new SKPaint { Color = new SkiaSharp.SKColor(255,255,0,50)};
+            SKPoint[] points =  entityAnnotation.BoundingPoly.Vertices.Select((vertex) => new SKPoint(vertex.X, vertex.Y)).ToArray();
+            SKRect rect = new SKRect(points[0].Y, points[1].Y, points[2].X, points[3].X);
+            
+            canvas.DrawRect(rect, skPaint);
 
-            using var image = System.Drawing.Image.FromStream(ms);
-            using Graphics g = Graphics.FromImage(image);
-            System.Drawing.Color highlightColor = System.Drawing.Color.FromArgb(50, System.Drawing.Color.Yellow);
-            SolidBrush shadowBrush = new SolidBrush(highlightColor);
-            g.FillPolygon(shadowBrush, entityAnnotation.BoundingPoly.Vertices.Select((vertex) => new System.Drawing.Point(vertex.X, vertex.Y)).ToArray());
-            return image;
+            return bitmap;
         }
 
         #endregion
@@ -369,7 +373,7 @@ namespace ArchaismDictionaryAndroidApp
                     Android.Graphics.Bitmap loadedImage;
                     Android.Graphics.Bitmap bitmap;
 
-                    byte[] newData = ImageToByteArray(editedImage);
+                    byte[] newData = editedImage.Bytes;
 
                     loadedImage = BitmapFactory.DecodeByteArray(newData, 0, newData.Length);
 
