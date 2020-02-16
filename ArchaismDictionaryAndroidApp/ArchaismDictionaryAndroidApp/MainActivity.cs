@@ -342,7 +342,7 @@ namespace ArchaismDictionaryAndroidApp
                     {
                         result = FindWordInDatabase(annotation.Description);
 
-                        if (annotation.Description == result && result != string.Empty)
+                        if (result != string.Empty)
                         {
                             editedImage = HighlightWord(bytes, annotation);
                             break;
@@ -364,6 +364,8 @@ namespace ArchaismDictionaryAndroidApp
 
         public void OnPictureTaken(byte[] data)
         {
+            CheckConnection();
+
             if (isConnected == true)
             {
                 result = OCR(data);
@@ -398,50 +400,54 @@ namespace ArchaismDictionaryAndroidApp
 
             input = input.ToLower();
 
-            for (int i = 0; i < dataBase.Length / 2; i++)
+            string[] inputWords = input.Split("\n");
+
+            foreach (string word in inputWords)
             {
-                if (input == dataBase[i, 0])
+                for (int i = 0; i < dataBase.Length / 2; i++)
                 {
-                    final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
-                }
-                else
-                {
-                    char[] wordOne = input.ToCharArray();
-                    char[] wordTwo = dataBase[i, 0].ToCharArray();
-
-                    if (wordOne.Length > 4 && wordTwo.Length > 4)
+                    if (word == dataBase[i, 0])
                     {
-                        int difference = 0;
+                        final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
+                    }
+                    else
+                    {
+                        char[] wordOne = word.ToCharArray();
+                        char[] wordTwo = dataBase[i, 0].ToCharArray();
 
-                        if (wordOne.Length < wordTwo.Length)
+                        if (wordOne.Length > 4 && wordTwo.Length > 4)
                         {
-                            for (int j = 0; j < wordOne.Length; j++)
+                            int difference = 0;
+
+                            if (wordOne.Length < wordTwo.Length)
                             {
-                                if (wordOne[j] != wordTwo[j])
+                                for (int j = 0; j < wordOne.Length; j++)
                                 {
-                                    difference++;
+                                    if (wordOne[j] != wordTwo[j])
+                                    {
+                                        difference++;
+                                    }
                                 }
                             }
-                        }
-                        else
-                        {
-                            for (int j = 0; j < wordTwo.Length; j++)
+                            else
                             {
-                                if (wordOne[j] != wordTwo[j])
+                                for (int j = 0; j < wordTwo.Length; j++)
                                 {
-                                    difference++;
+                                    if (wordOne[j] != wordTwo[j])
+                                    {
+                                        difference++;
+                                    }
                                 }
                             }
-                        }
 
-                        if (difference < 3)
-                        {
-                            final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
+                            if (difference < 3)
+                            {
+                                final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
+                            }
                         }
                     }
                 }
             }
-
             return final;
         }
         #endregion

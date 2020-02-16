@@ -42,6 +42,7 @@
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
     <MandroidI18n />
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -99,9 +100,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Rest.ClientRuntime">
       <Version>2.3.21</Version>
-    </PackageReference>
-    <PackageReference Include="WpfAnimatedGif">
-      <Version>1.4.18</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
