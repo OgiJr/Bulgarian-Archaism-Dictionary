@@ -21,6 +21,7 @@ using ArchaismDictionaryAndroidApp.Network;
 using Android.Net;
 using Android.Content;
 using SkiaSharp;
+using SkiaSharp.Views.Android;
 
 namespace ArchaismDictionaryAndroidApp
 {
@@ -164,7 +165,7 @@ namespace ArchaismDictionaryAndroidApp
             resultText.Alpha = 0;
         }
 
-        private void FreezeFrame(Android.Graphics.Bitmap bitmap)
+        private void FreezeFrame(Bitmap bitmap)
         {
             freezeFrameImage.Enabled = true;
             freezeFrameImage.SetImageBitmap(bitmap);
@@ -223,23 +224,6 @@ namespace ArchaismDictionaryAndroidApp
             errorScreen.Alpha = 0;
 
         }
-
-        private SKBitmap HighlightWord(byte[] bytes, Google.Cloud.Vision.V1.EntityAnnotation entityAnnotation)
-        {
-            var ms = new MemoryStream(bytes);
-            
-            SKBitmap bitmap = SKBitmap.Decode(ms);
-            var canvas = new SKCanvas(bitmap);
-            
-            SKPaint skPaint = new SKPaint { Color = new SkiaSharp.SKColor(255,255,0,50)};
-            SKPoint[] points =  entityAnnotation.BoundingPoly.Vertices.Select((vertex) => new SKPoint(vertex.X, vertex.Y)).ToArray();
-            SKRect rect = new SKRect(points[0].Y, points[1].Y, points[2].X, points[3].X);
-            
-            canvas.DrawRect(rect, skPaint);
-
-            return bitmap;
-        }
-
         #endregion
 
         #region Credentials
@@ -329,7 +313,7 @@ namespace ArchaismDictionaryAndroidApp
         private string OCR(byte[] bytes)
         {
             var client = ImageAnnotatorClient.Create(channel);
-            var img = Google.Cloud.Vision.V1.Image.FromBytes(bytes);
+            var img = Image.FromBytes(bytes);
             var response = client.DetectText(img);
 
             result = string.Empty;
@@ -340,26 +324,12 @@ namespace ArchaismDictionaryAndroidApp
                 {
                     if (annotation.Description != null)
                     {
-                        result = FindWordInDatabase(annotation.Description);
-
-                        if (result != string.Empty)
-                        {
-                            editedImage = HighlightWord(bytes, annotation);
-                            break;
-                        }
-
+                        result = FindWordInDictionary(annotation.Description);
                     }
                 }
             }
 
             return result;
-        }
-
-        public byte[] ImageToByteArray(System.Drawing.Image imageIn)
-        {
-            using var ms = new MemoryStream();
-            imageIn.Save(ms, imageIn.RawFormat);
-            return ms.ToArray();
         }
 
         public void OnPictureTaken(byte[] data)
@@ -372,16 +342,14 @@ namespace ArchaismDictionaryAndroidApp
 
                 if (result != string.Empty)
                 {
-                    Android.Graphics.Bitmap loadedImage;
-                    Android.Graphics.Bitmap bitmap;
+                    Bitmap loadedImage;
+                    Bitmap bitmap;
 
-                    byte[] newData = editedImage.Bytes;
-
-                    loadedImage = BitmapFactory.DecodeByteArray(newData, 0, newData.Length);
+                    loadedImage = editedImage.ToBitmap();
 
                     Matrix rotateMatrix = new Matrix();
                     rotateMatrix.PostRotate(90f);
-                    bitmap = Android.Graphics.Bitmap.CreateBitmap(loadedImage, 0, 0, loadedImage.Width, loadedImage.Height, rotateMatrix, false);
+                    bitmap = Bitmap.CreateBitmap(loadedImage, 0, 0, loadedImage.Width, loadedImage.Height, rotateMatrix, false);
 
                     FreezeFrame(bitmap);
                 }
@@ -394,7 +362,7 @@ namespace ArchaismDictionaryAndroidApp
         #endregion
 
         #region DictionaryManager
-        public static string FindWordInDatabase(string input)
+        public static string FindWordInDictionary(string input)
         {
             string final = string.Empty;
 
@@ -412,37 +380,21 @@ namespace ArchaismDictionaryAndroidApp
                     }
                     else
                     {
-                        char[] wordOne = word.ToCharArray();
-                        char[] wordTwo = dataBase[i, 0].ToCharArray();
-
-                        if (wordOne.Length > 4 && wordTwo.Length > 4)
+                        if (word.Length > 4 && dataBase[i, 0].Length > 4)
                         {
-                            int difference = 0;
-
-                            if (wordOne.Length < wordTwo.Length)
+                            if (word.Length < dataBase[i, 0].Length)
                             {
-                                for (int j = 0; j < wordOne.Length; j++)
+                                if (word.Contains(dataBase[i, 0]) == true)
                                 {
-                                    if (wordOne[j] != wordTwo[j])
-                                    {
-                                        difference++;
-                                    }
+                                    final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
                                 }
                             }
                             else
                             {
-                                for (int j = 0; j < wordTwo.Length; j++)
+                                if (dataBase[i, 0].Contains(word) == true)
                                 {
-                                    if (wordOne[j] != wordTwo[j])
-                                    {
-                                        difference++;
-                                    }
+                                    final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
                                 }
-                            }
-
-                            if (difference < 3)
-                            {
-                                final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
                             }
                         }
                     }
