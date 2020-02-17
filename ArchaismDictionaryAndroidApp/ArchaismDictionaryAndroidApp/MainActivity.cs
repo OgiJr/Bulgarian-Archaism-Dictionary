@@ -136,9 +136,8 @@ namespace ArchaismDictionaryAndroidApp
 
         private void FontDesign()
         {
-            var appFont = Typeface.CreateFromAsset(ApplicationContext.Assets, "Roboto-Regular.ttf");
-            resultText.Typeface = appFont;
-            errorScreen.Typeface = appFont;
+            resultText.Typeface = Typeface.Monospace;
+            errorScreen.Typeface = Typeface.Monospace;
         }
 
         private void TakePicture(object sender, EventArgs e)
@@ -165,13 +164,15 @@ namespace ArchaismDictionaryAndroidApp
         private void FreezeFrame(Bitmap bitmap)
         {
             freezeFrameImage.Enabled = true;
-            freezeFrameImage.SetImageBitmap(bitmap);
+            freezeFrameImage.SetImageBitmap(Bitmap.CreateScaledBitmap(bitmap, bitmap.Width, (int)(bitmap.Height * 1.05f),false));
             freezeFrameImage.Alpha = 256;
 
             unfreezeButton.Enabled = true;
             unfreezeButton.Alpha = 256;
 
             cameraView.Alpha = 0;
+            freezeFrameImage.SetMinimumHeight(cameraView.Height);
+            cameraView.Enabled = false;
             captureButton.Alpha = 0;
             captureButton.Enabled = false;
 
@@ -342,8 +343,7 @@ namespace ArchaismDictionaryAndroidApp
                     Bitmap loadedImage;
                     Bitmap bitmap;
 
-                    loadedImage = BitmapFactory.DecodeByteArray(data,0, data.Length);
-
+                    loadedImage = BitmapFactory.DecodeByteArray(data, 0, data.Length);
                     Matrix rotateMatrix = new Matrix();
                     rotateMatrix.PostRotate(90f);
                     bitmap = Bitmap.CreateBitmap(loadedImage, 0, 0, loadedImage.Width, loadedImage.Height, rotateMatrix, false);

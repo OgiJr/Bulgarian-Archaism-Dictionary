@@ -6,15 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id = "@+id/freezeframeView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <SurfaceView
         android:id = "@+id/cameraView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <ImageView
+        android:id = "@+id/freezeframeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigation"/>
 
     <TextView
         android:id = "@+id/resultText"
@@ -25,7 +26,7 @@
         android:text = "Засечен текст"
         android:textSize = "24dp"
         android:background = "#FFFFFF"
-        android:textColor = "@android:color/black"
+        android:textColor = "#8FC1D2"
         android:gravity = "center_horizontal"/>
 
     <ImageView

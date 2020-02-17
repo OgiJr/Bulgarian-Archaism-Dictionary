@@ -73,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\d576ac9cb652.json" />
-    <AndroidAsset Include="Assets\Roboto-Regular.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
