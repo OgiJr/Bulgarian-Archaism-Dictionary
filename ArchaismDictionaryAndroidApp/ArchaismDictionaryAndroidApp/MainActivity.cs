@@ -20,8 +20,6 @@ using System.Linq;
 using ArchaismDictionaryAndroidApp.Network;
 using Android.Net;
 using Android.Content;
-using SkiaSharp;
-using SkiaSharp.Views.Android;
 
 namespace ArchaismDictionaryAndroidApp
 {
@@ -50,7 +48,6 @@ namespace ArchaismDictionaryAndroidApp
         #region OCRVariables
         private const int requestCameraPermission = 1001;
         public string result;
-        public SKBitmap editedImage;
         #endregion
 
         #region NetworkVariables
@@ -345,7 +342,7 @@ namespace ArchaismDictionaryAndroidApp
                     Bitmap loadedImage;
                     Bitmap bitmap;
 
-                    loadedImage = editedImage.ToBitmap();
+                    loadedImage = BitmapFactory.DecodeByteArray(data,0, data.Length);
 
                     Matrix rotateMatrix = new Matrix();
                     rotateMatrix.PostRotate(90f);
