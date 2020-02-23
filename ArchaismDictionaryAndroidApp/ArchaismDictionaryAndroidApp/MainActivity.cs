@@ -20,10 +20,11 @@ using System.Linq;
 using ArchaismDictionaryAndroidApp.Network;
 using Android.Net;
 using Android.Content;
+using System.Threading.Tasks;
 
 namespace ArchaismDictionaryAndroidApp
 {
-    [Activity(Label = "@string/app_name", Icon = "@drawable/AppLogo", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Icon = "@drawable/AppLogo", Theme = "@style/splash", MainLauncher = true)]
     public class MainActivity : AppCompatActivity, ISurfaceHolderCallback, CameraSource.IPictureCallback, INetworkConnection
     {
         #region Variables 
@@ -37,6 +38,8 @@ namespace ArchaismDictionaryAndroidApp
         private ImageButton captureButton;
         private ImageButton unfreezeButton;
         private Button retry;
+        private ImageView loadingImage;
+        private TextView loadingText;
         #endregion
 
         #region GoogleCredentialVariables
@@ -60,6 +63,7 @@ namespace ArchaismDictionaryAndroidApp
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            base.SetTheme(Resource.Style.splash);
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.activity_main);
@@ -69,14 +73,13 @@ namespace ArchaismDictionaryAndroidApp
 
             if (isConnected == true)
             {
-                CreateGoogleCredentials();
-                CreateCameraSource();
+               CreateGoogleCredentials();
+               CreateCameraSource();
             }
             else
             {
                 NetworkErrorScreen();
             }
-
         }
 
         #region NetworkManager
@@ -116,7 +119,11 @@ namespace ArchaismDictionaryAndroidApp
             unfreezeButton = FindViewById<ImageButton>(Resource.Id.unfreezeButton);
             errorScreen = FindViewById<TextView>(Resource.Id.errorText);
             retry = FindViewById<Button>(Resource.Id.retry);
-
+            loadingImage = FindViewById<ImageView>(Resource.Id.loadingImage);
+            loadingText = FindViewById<TextView>(Resource.Id.loadingText);
+            
+            NotLoading();
+            
             captureButton.Click += TakePicture;
             unfreezeButton.Click += UnfreezeFrame;
             retry.Click += RemoveErrorScreen;
@@ -142,6 +149,7 @@ namespace ArchaismDictionaryAndroidApp
 
         private void TakePicture(object sender, EventArgs e)
         {
+            LoadingScreen();
             cameraSource.TakePicture(null, this);
         }
 
@@ -221,6 +229,22 @@ namespace ArchaismDictionaryAndroidApp
             errorScreen.Enabled = false;
             errorScreen.Alpha = 0;
 
+        }
+        
+        private void LoadingScreen()
+        {
+            loadingText.Enabled = true;
+            loadingImage.Enabled = true;
+            loadingText.Alpha = 256;
+            loadingImage.Alpha = 256;
+        }
+
+        private void NotLoading()
+        {
+            loadingText.Enabled = false;
+            loadingImage.Enabled = false;
+            loadingText.Alpha = 0;
+            loadingImage.Alpha = 0;
         }
         #endregion
 
@@ -332,6 +356,7 @@ namespace ArchaismDictionaryAndroidApp
 
         public void OnPictureTaken(byte[] data)
         {
+            NotLoading();
             CheckConnection();
 
             if (isConnected == true)

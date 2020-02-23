@@ -100,11 +100,11 @@
     <PackageReference Include="Microsoft.Rest.ClientRuntime">
       <Version>2.3.21</Version>
     </PackageReference>
-    <PackageReference Include="SkiaSharp">
-      <Version>1.68.1.1</Version>
+    <PackageReference Include="WinJSContrib.ExtendedSplashScreen">
+      <Version>2.0.0.6</Version>
     </PackageReference>
-    <PackageReference Include="SkiaSharp.Views">
-      <Version>1.68.1.1</Version>
+    <PackageReference Include="Xamarin.Android.CirclePageIndicator">
+      <Version>1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
@@ -150,7 +150,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Loading.gif" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\SplashBackground.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.
