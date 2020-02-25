@@ -20,7 +20,6 @@ using System.Linq;
 using ArchaismDictionaryAndroidApp.Network;
 using Android.Net;
 using Android.Content;
-using System.Threading.Tasks;
 
 namespace ArchaismDictionaryAndroidApp
 {
@@ -40,6 +39,16 @@ namespace ArchaismDictionaryAndroidApp
         private Button retry;
         private ImageView loadingImage;
         private TextView loadingText;
+        private Android.Support.Design.Internal.BottomNavigationItemView bottomBarDict;
+        private Android.Support.Design.Internal.BottomNavigationItemView bottomBarOCR;
+        #endregion
+
+        #region SecondaryScreenVariables
+        ImageView searchTopBackground;
+        EditText searchInput;
+        TextView searchWord;
+        TextView searchDefinition;
+        Button search;
         #endregion
 
         #region GoogleCredentialVariables
@@ -54,8 +63,7 @@ namespace ArchaismDictionaryAndroidApp
         #endregion
 
         #region NetworkVariables
-        public static string[,] dataBase = { { "архаизъм", "дума със старинен произход" }, { "игото", "робството" } };
-
+        public static string[,] dataBase = { { "Заптие", "Войник от турско време" }, { "Игото", "Робството" }, {"i", "beeboop"} };
         public bool isConnected { get; set; }
         #endregion
 
@@ -73,8 +81,8 @@ namespace ArchaismDictionaryAndroidApp
 
             if (isConnected == true)
             {
-               CreateGoogleCredentials();
-               CreateCameraSource();
+                CreateGoogleCredentials();
+                CreateCameraSource();
             }
             else
             {
@@ -105,7 +113,6 @@ namespace ArchaismDictionaryAndroidApp
             ErrorScreen();
             errorScreen.Text = "Моля свържете се към интернет";
         }
-
         #endregion
 
         #region UIManager
@@ -121,12 +128,24 @@ namespace ArchaismDictionaryAndroidApp
             retry = FindViewById<Button>(Resource.Id.retry);
             loadingImage = FindViewById<ImageView>(Resource.Id.loadingImage);
             loadingText = FindViewById<TextView>(Resource.Id.loadingText);
-            
+
+            bottomBarOCR = FindViewById<Android.Support.Design.Internal.BottomNavigationItemView>(Resource.Id.navigation_ocr);
+            bottomBarDict = FindViewById<Android.Support.Design.Internal.BottomNavigationItemView>(Resource.Id.navigation_dictionary);
+
+            searchTopBackground = FindViewById<ImageView>(Resource.Id.topBackground);
+            searchInput = FindViewById<EditText>(Resource.Id.dictionaryInput);
+            searchWord = FindViewById<TextView>(Resource.Id.dictionaryWord);
+            searchDefinition = FindViewById<TextView>(Resource.Id.dictionaryDefinition);
+            search = FindViewById<Button>(Resource.Id.searchButton);
+
             NotLoading();
-            
+
             captureButton.Click += TakePicture;
             unfreezeButton.Click += UnfreezeFrame;
             retry.Click += RemoveErrorScreen;
+            bottomBarDict.Click += SearchScreen;
+            bottomBarOCR.Click += OCRScreenButton;
+            search.Click += Search;
 
             unfreezeButton.Enabled = false;
             unfreezeButton.Alpha = 0;
@@ -138,13 +157,7 @@ namespace ArchaismDictionaryAndroidApp
             retry.Enabled = false;
             retry.Alpha = 0;
 
-            FontDesign();
-        }
-
-        private void FontDesign()
-        {
-            resultText.Typeface = Typeface.Monospace;
-            errorScreen.Typeface = Typeface.Monospace;
+            OCRScreen();
         }
 
         private void TakePicture(object sender, EventArgs e)
@@ -152,6 +165,14 @@ namespace ArchaismDictionaryAndroidApp
             LoadingScreen();
             cameraSource.TakePicture(null, this);
         }
+
+        private void Search(object sender, EventArgs e)
+        {
+            searchDefinition.Text = FindWordInDictionary(searchInput.Text);
+            string[] arr = searchDefinition.Text.Split(":", 2);
+            searchWord.Text = arr[0];
+        }
+
 
         private void UnfreezeFrame(object sender, EventArgs e)
         {
@@ -172,7 +193,7 @@ namespace ArchaismDictionaryAndroidApp
         private void FreezeFrame(Bitmap bitmap)
         {
             freezeFrameImage.Enabled = true;
-            freezeFrameImage.SetImageBitmap(Bitmap.CreateScaledBitmap(bitmap, bitmap.Width, (int)(bitmap.Height * 1.05f),false));
+            freezeFrameImage.SetImageBitmap(Bitmap.CreateScaledBitmap(bitmap, bitmap.Width, (int)(bitmap.Height * 1.05f), false));
             freezeFrameImage.Alpha = 256;
 
             unfreezeButton.Enabled = true;
@@ -230,7 +251,7 @@ namespace ArchaismDictionaryAndroidApp
             errorScreen.Alpha = 0;
 
         }
-        
+
         private void LoadingScreen()
         {
             loadingText.Enabled = true;
@@ -246,6 +267,64 @@ namespace ArchaismDictionaryAndroidApp
             loadingText.Alpha = 0;
             loadingImage.Alpha = 0;
         }
+
+        private void OCRScreenButton(object sender, EventArgs e)
+        {
+            OCRScreen();
+        }
+
+        private void OCRScreen()
+        {
+            searchTopBackground.Enabled = false;
+            searchTopBackground.Alpha = 0;
+            searchInput.Enabled = false;
+            searchInput.Alpha = 0;
+            searchWord.Enabled = false;
+            searchWord.Alpha = 0;
+            searchDefinition.Enabled = false;
+            searchDefinition.Alpha = 0;
+            search.Enabled = false;
+            search.Alpha = 0;
+
+            cameraView.Enabled = true;
+            cameraView.Alpha = 256;
+            captureButton.Enabled = true;
+            captureButton.Alpha = 256;
+        }
+
+        private void SearchScreen(object sender, EventArgs e)
+        {
+            searchTopBackground.Enabled = true;
+            searchTopBackground.Alpha = 256;
+            searchInput.Enabled = true;
+            searchInput.Alpha = 256;
+            searchWord.Enabled = true;
+            searchWord.Alpha = 256;
+            searchDefinition.Enabled = true;
+            searchDefinition.Alpha = 256;
+            search.Enabled = true;
+            search.Alpha = 256;
+
+            cameraView.Enabled = false;
+            cameraView.Alpha = 0;
+            freezeFrameImage.Enabled = false;
+            freezeFrameImage.Alpha = 0;
+            captureButton.Enabled = false;
+            captureButton.Alpha = 0;
+            resultText.Enabled = false;
+            resultText.Alpha = 0;
+            unfreezeButton.Enabled = false;
+            unfreezeButton.Alpha = 0;
+            errorScreen.Enabled = false;
+            errorScreen.Alpha = 0;
+            retry.Enabled = false;
+            retry.Alpha = 0;
+            loadingImage.Enabled = false;
+            loadingImage.Alpha = 0;
+            loadingText.Enabled = false;
+            loadingText.Alpha = 0;
+        }
+
         #endregion
 
         #region Credentials

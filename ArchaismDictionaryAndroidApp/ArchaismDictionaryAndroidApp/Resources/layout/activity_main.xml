@@ -4,7 +4,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    >
+
+    <ImageView
+        android:id = "@+id/topBackground"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop = "true"
+        android:src = "@drawable/backgroundaccent"
+        android:scaleType = "matrix"
+    />
+
+    <EditText
+        android:id ="@+id/dictionaryInput"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal = "true"
+        android:layout_alignParentTop = "true"
+        android:textColor = "@android:color/white"
+        android:hint = "Въведете думата тук"
+        android:paddingHorizontal = "20dp"
+        android:focusableInTouchMode="true"
+        android:typeface = "serif"/>
+
+    <TextView
+        android:id = "@+id/dictionaryWord"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop = "true"
+        android:gravity = "bottom"
+        android:textAlignment = "center"
+        android:textSize = "48dp"
+        android:paddingBottom = "50dp"
+        android:textColor = "@android:color/white"
+        android:typeface = "serif"/>
+
+    <TextView
+        android:id = "@+id/dictionaryDefinition"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below = "@+id/dictionaryWord"
+        android:paddingVertical = "30dp"
+        android:paddingHorizontal = "30dp"
+        android:textSize = "24dp"
+        android:textColor = "@android:color/black"
+        android:background = "@android:color/white"
+        android:typeface = "serif"/>
+    
+    <Button
+        android:id = "@+id/searchButton"
+        android:layout_width= "150dp"
+        android:layout_height="75dp"
+        android:layout_above="@+id/navigation"
+        android:layout_centerHorizontal = "true"
+        android:gravity = "center"
+        android:background = "@color/colorAccent"
+        android:foregroundGravity = "bottom"
+        android:text = "Потърси"
+        android:textSize = "22dp"
+        android:typeface = "serif"
+        android:textColor = "@android:color/white"/>
 
     <SurfaceView
         android:id = "@+id/cameraView"
@@ -28,7 +89,8 @@
         android:textSize = "24dp"
         android:background = "#FFFFFF"
         android:textColor = "#8FC1D2"
-        android:gravity = "center_horizontal"/>
+        android:gravity = "center_horizontal"
+        android:typeface = "serif"/>
 
     <ImageView
         android:id = "@+id/loadingImage"
@@ -41,14 +103,15 @@
 
     <TextView
         android:id = "@+id/loadingText"
-        android:layout_width="150dp"
+        android:layout_width="250dp"
         android:layout_height="150dp"
         android:layout_centerInParent = "true"
         android:text = "Сканираме, моля изчакайте"
-        android:typeface = "monospace"
-        android:textSize = "16dp"
+        android:textSize = "18dp"
         android:textColor = "@android:color/white"
-        android:gravity = "center"/>
+        android:gravity = "center"
+        android:typeface = "serif" 
+    />
 
     <ImageButton
         android:id = "@+id/captureButton"
@@ -76,28 +139,29 @@
 
     <ImageButton
         android:id = "@+id/unfreezeButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentLeft = "true"
         android:layout_alignParentTop ="true"
         android:src = "@drawable/back"
         android:background="@null"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"/>
-    
+
     <TextView
         android:id = "@+id/errorText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity = "center_horizontal"
-        android:background = "#FFFFFF"/>
+        android:background = "#FFFFFF"
+        android:typeface = "serif"/>
 
     <Button
         android:id = "@+id/retry"
         android:layout_width="200dp"
         android:layout_height="80dp"
         android:layout_centerInParent = "true"
-        android:text = "Unfreeze"
+        android:text = "Повторен опит"
         android:textColor = "@android:color/white"
         android:background = "#8FC1D2"/>
 
@@ -107,5 +171,6 @@
         android:layout_height="100dp"
         android:background = "@null"
         android:layout_centerInParent = "false"/>
+
 
 </RelativeLayout>
