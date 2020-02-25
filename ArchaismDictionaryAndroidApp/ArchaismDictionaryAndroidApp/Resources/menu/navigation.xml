@@ -9,11 +9,11 @@ android:icon ="@drawable/ocr"/>
   <item
       android:id="@+id/navigation_dictionary"
       android:title="Потърси дума"
-android:icon ="@drawable/search"/>
+android:icon ="@drawable/literature"/>
 
-  <item
+  <!--<item
       android:id="@+id/navigation_literature"
       android:title="Произведения"
-android:icon ="@drawable/literature"/>
+android:icon ="@drawable/literature"/>-->
 
 </menu>
