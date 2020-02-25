@@ -4,36 +4,83 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="main.css">
     <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+    </script>
   </head>
+
   <body>
-    <div class="container">
-  <ul id="nav">
-    <li class="toggle">
-      <div class="bar1"></div><div class="bar2"></div><div class="bar3"></div>
-    </li>
-    <li><a href="">НАЧАЛНА СТРАНИЦА</a></li>
-    <li><a href="">ДУМИ</a></li>
-    <li><a href="">ЗА НАС</a></li>
-    <li><a href="">КОНТАКТИ</a></li>
-  </ul>
 
-  <header class="hero-header">
-  <h1 class="hero-title">Речник на българския архаизъм</h1>
-</header>
-<footer class="hero-footer">
-  <a class="button button-primary" href="#">button one</a>
-  <a class="button" href="#">button two</a>
-</footer>
+  <div class="main-wrapper">
+  <header class="header">
+    <div class="logo">
+      <h1>BG Archaism</h1>
+    </div>
+    <div class="feature-content">
+      <h1>Речник на българския архаизъм</h1>
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.toggle').click(function(){
-      $('#nav').toggleClass('open');
-      $('.container').toggleClass('menu-open');
-    });
-  });
+      <a href="#" class="theme-btn btn-animated">Речник</a>
+    </div>
+  </header>
+
+  <div class="menu-icon">
+      <img src="https://img.icons8.com/cotton/2x/menu.png"/>
+   </div>
+
+  <div class="nav-bar">
+    <ul>
+      <li>
+        <a href="index.php">
+          Начална страница
+        </a>
+      </li>
+      <li>
+        <a href="words.php">
+          Думи
+        </a>
+      </li>
+      <li>
+        <a href="dictionary.php">
+          Речник
+        </a>
+      </li>
+      <li>
+        <a href="about.php">
+          За нас
+        </a>
+      </li>
+      <li>
+        <a href="contact.php">
+          Контакти
+        </a>
+      </li>
+    </ul>
+  </div>
+  </div>
+
+
+<script>
+var i = 0;
+var txt = 'В българският език и литература се използват множество различни архаизми и диалекти. Те могат да затруднят учениците, които не ги разбират, но също така правят нашия език по-богат. Затова, те не могат да бъдат заменени, за да се улеснят произведенията.  Тази тема стана изключително актуална, когато през 2019г. бяха сменени 6000 архаични думи в „Под игото“ на Иван Вазов, което доведе до множество отзиви на различни новинарски компании и индивидуални създатели в Интернет пространството в полза на премахването на тези промени. ';
+var speed = 50;
+
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("demo").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+
 </script>
 
-</div>
+
+<script>
+
+$(".menu-icon").click(function() {
+  $(".nav-bar").toggle('slow');
+});
+
+</script>
+
   </body>
 </html>
