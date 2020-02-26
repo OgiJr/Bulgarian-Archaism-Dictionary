@@ -89,7 +89,7 @@
         android:text = "Засечен текст"
         android:textSize = "24dp"
         android:background = "#FFFFFF"
-        android:textColor = "#8FC1D2"
+        android:textColor = "@android:color/black"
         android:gravity = "center_horizontal"
         android:typeface = "serif"/>
 
