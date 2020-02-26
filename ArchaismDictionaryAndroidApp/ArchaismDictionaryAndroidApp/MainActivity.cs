@@ -20,6 +20,10 @@ using System.Linq;
 using ArchaismDictionaryAndroidApp.Network;
 using Android.Net;
 using Android.Content;
+using Xamarin.Essentials;
+using Android.Content.Res;
+using Newtonsoft.Json;
+
 
 namespace ArchaismDictionaryAndroidApp
 {
@@ -63,8 +67,9 @@ namespace ArchaismDictionaryAndroidApp
         #endregion
 
         #region NetworkVariables
-        public static string[,] dataBase = { { "Заптие", "Войник от турско време" }, { "Игото", "Робството" }, {"i", "beeboop"} };
+        public static string[,] dataBase;
         public bool isConnected { get; set; }
+        public int wordCount;
         #endregion
 
         #endregion
@@ -81,6 +86,7 @@ namespace ArchaismDictionaryAndroidApp
 
             if (isConnected == true)
             {
+                DictionaryManager();
                 CreateGoogleCredentials();
                 CreateCameraSource();
             }
@@ -185,6 +191,7 @@ namespace ArchaismDictionaryAndroidApp
             resultText.Enabled = false;
             unfreezeButton.Alpha = 0;
             freezeFrameImage.Enabled = false;
+            freezeFrameImage.Alpha = 0;
             unfreezeButton.Alpha = 0;
             resultText.Enabled = false;
             resultText.Alpha = 0;
@@ -348,7 +355,7 @@ namespace ArchaismDictionaryAndroidApp
 
         public void CreateGoogleCredentials()
         {
-            string path = "d576ac9cb652.json";
+            string path = "44fe2d26dab6.json";
             Stream stream = Application.Context.Assets.Open(path);
 
             credentials = GoogleCredential.FromStream(stream);
@@ -423,7 +430,7 @@ namespace ArchaismDictionaryAndroidApp
             {
                 foreach (var annotation in response)
                 {
-                    if (annotation.Description != null)
+                    if (annotation.Description != null && result == string.Empty)
                     {
                         result = FindWordInDictionary(annotation.Description);
                     }
@@ -485,7 +492,7 @@ namespace ArchaismDictionaryAndroidApp
                         {
                             if (word.Length < dataBase[i, 0].Length)
                             {
-                                if (word.Contains(dataBase[i, 0]) == true)
+                                if (dataBase[i, 0].Contains(word) == true)
                                 {
                                     final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
                                 }
@@ -502,6 +509,38 @@ namespace ArchaismDictionaryAndroidApp
                 }
             }
             return final;
+        }
+
+        private void DictionaryManager()
+        {
+            string rawJSON;
+
+            #region Simulates downloading a json file
+            const string fileName = "dictionary.json";
+            string jsonRead;
+            AssetManager assets = this.Assets;
+            using (StreamReader sr = new StreamReader(assets.Open(fileName)))
+            {
+                jsonRead = sr.ReadToEnd();
+            }
+            #endregion
+
+            File.WriteAllText(FileSystem.AppDataDirectory + fileName, jsonRead);
+
+
+            rawJSON = File.ReadAllText(FileSystem.AppDataDirectory + fileName);
+
+            var list = JsonConvert.DeserializeObject<Dictionary.JSONClass>(rawJSON);
+
+            wordCount = list.Property1[2].data.Length;
+            
+            dataBase = new string[wordCount, 2];
+
+            for (int i = 0; i < wordCount; i++)
+            {
+                dataBase[i,0] = list.Property1[2].data[i].word;
+                dataBase[i, 1] = list.Property1[2].data[i].definition;
+            }
         }
         #endregion
 

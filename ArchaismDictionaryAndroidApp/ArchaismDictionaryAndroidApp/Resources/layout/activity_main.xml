@@ -19,6 +19,7 @@
 
     <EditText
         android:id ="@+id/dictionaryInput"
+        android:inputType = "textShortMessage"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_centerHorizontal = "true"
@@ -44,7 +45,7 @@
     <TextView
         android:id = "@+id/dictionaryDefinition"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
         android:layout_below = "@+id/dictionaryWord"
         android:paddingVertical = "30dp"
         android:paddingHorizontal = "30dp"
@@ -77,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/navigation"
-        android:scaleType="matrix" />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id = "@+id/resultText"
@@ -88,7 +89,7 @@
         android:text = "Засечен текст"
         android:textSize = "24dp"
         android:background = "#FFFFFF"
-        android:textColor = "#8FC1D2"
+        android:textColor = "@android:color/black"
         android:gravity = "center_horizontal"
         android:typeface = "serif"/>
 
@@ -139,8 +140,8 @@
 
     <ImageButton
         android:id = "@+id/unfreezeButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_alignParentLeft = "true"
         android:layout_alignParentTop ="true"
         android:src = "@drawable/back"
