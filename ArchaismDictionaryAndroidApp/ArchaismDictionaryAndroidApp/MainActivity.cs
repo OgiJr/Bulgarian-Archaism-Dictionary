@@ -191,6 +191,7 @@ namespace ArchaismDictionaryAndroidApp
             resultText.Enabled = false;
             unfreezeButton.Alpha = 0;
             freezeFrameImage.Enabled = false;
+            freezeFrameImage.Alpha = 0;
             unfreezeButton.Alpha = 0;
             resultText.Enabled = false;
             resultText.Alpha = 0;
@@ -354,7 +355,7 @@ namespace ArchaismDictionaryAndroidApp
 
         public void CreateGoogleCredentials()
         {
-            string path = "d576ac9cb652.json";
+            string path = "44fe2d26dab6.json";
             Stream stream = Application.Context.Assets.Open(path);
 
             credentials = GoogleCredential.FromStream(stream);
@@ -429,7 +430,7 @@ namespace ArchaismDictionaryAndroidApp
             {
                 foreach (var annotation in response)
                 {
-                    if (annotation.Description != null)
+                    if (annotation.Description != null && result == string.Empty)
                     {
                         result = FindWordInDictionary(annotation.Description);
                     }
@@ -491,7 +492,7 @@ namespace ArchaismDictionaryAndroidApp
                         {
                             if (word.Length < dataBase[i, 0].Length)
                             {
-                                if (word.Contains(dataBase[i, 0]) == true)
+                                if (dataBase[i, 0].Contains(word) == true)
                                 {
                                     final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
                                 }
@@ -537,8 +538,8 @@ namespace ArchaismDictionaryAndroidApp
 
             for (int i = 0; i < wordCount; i++)
             {
-                dataBase[i,0] = list.Property1[2].data[1].word;
-                dataBase[i, 1] = list.Property1[2].data[1].definition;
+                dataBase[i,0] = list.Property1[2].data[i].word;
+                dataBase[i, 1] = list.Property1[2].data[i].definition;
             }
         }
         #endregion
