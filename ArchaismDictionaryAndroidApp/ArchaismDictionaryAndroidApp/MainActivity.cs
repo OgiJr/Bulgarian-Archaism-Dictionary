@@ -20,6 +20,10 @@ using System.Linq;
 using ArchaismDictionaryAndroidApp.Network;
 using Android.Net;
 using Android.Content;
+using Xamarin.Essentials;
+using Android.Content.Res;
+using Newtonsoft.Json;
+
 
 namespace ArchaismDictionaryAndroidApp
 {
@@ -63,8 +67,9 @@ namespace ArchaismDictionaryAndroidApp
         #endregion
 
         #region NetworkVariables
-        public static string[,] dataBase = { { "Заптие", "Войник от турско време" }, { "Игото", "Робството" }, {"i", "beeboop"} };
+        public static string[,] dataBase;
         public bool isConnected { get; set; }
+        public int wordCount;
         #endregion
 
         #endregion
@@ -81,6 +86,7 @@ namespace ArchaismDictionaryAndroidApp
 
             if (isConnected == true)
             {
+                DictionaryManager();
                 CreateGoogleCredentials();
                 CreateCameraSource();
             }
@@ -502,6 +508,38 @@ namespace ArchaismDictionaryAndroidApp
                 }
             }
             return final;
+        }
+
+        private void DictionaryManager()
+        {
+            string rawJSON;
+
+            #region Simulates downloading a json file
+            const string fileName = "dictionary.json";
+            string jsonRead;
+            AssetManager assets = this.Assets;
+            using (StreamReader sr = new StreamReader(assets.Open(fileName)))
+            {
+                jsonRead = sr.ReadToEnd();
+            }
+            #endregion
+
+            File.WriteAllText(FileSystem.AppDataDirectory + fileName, jsonRead);
+
+
+            rawJSON = File.ReadAllText(FileSystem.AppDataDirectory + fileName);
+
+            var list = JsonConvert.DeserializeObject<Dictionary.JSONClass>(rawJSON);
+
+            wordCount = list.Property1[2].data.Length;
+            
+            dataBase = new string[wordCount, 2];
+
+            for (int i = 0; i < wordCount; i++)
+            {
+                dataBase[i,0] = list.Property1[2].data[1].word;
+                dataBase[i, 1] = list.Property1[2].data[1].definition;
+            }
         }
         #endregion
 
