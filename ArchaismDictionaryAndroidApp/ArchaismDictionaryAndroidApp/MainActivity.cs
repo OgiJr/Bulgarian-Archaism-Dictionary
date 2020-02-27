@@ -32,6 +32,9 @@ namespace ArchaismDictionaryAndroidApp
     {
         #region Variables 
 
+        /// <summary>
+        ///  UI elements which are displayed on the OCR page
+        /// </summary>
         #region MainScreenVariables
         private SurfaceView cameraView;
         private CameraSource cameraSource;
@@ -46,30 +49,38 @@ namespace ArchaismDictionaryAndroidApp
         private Android.Support.Design.Internal.BottomNavigationItemView bottomBarDict;
         private Android.Support.Design.Internal.BottomNavigationItemView bottomBarOCR;
         #endregion
-
+        /// <summary>
+        ///  UI elements which are displayed on the Search page
+        ///  /// </summary>
         #region SecondaryScreenVariables
-        ImageView searchTopBackground;
-        EditText searchInput;
-        TextView searchWord;
-        TextView searchDefinition;
-        Button search;
+        private ImageView searchTopBackground;
+        private EditText searchInput;
+        private TextView searchWord;
+        private TextView searchDefinition;
+        private Button search;
         #endregion
 
         #region GoogleCredentialVariables
-        GoogleCredential credentials;
-        StorageClient storage;
-        Grpc.Core.Channel channel;
+        private GoogleCredential credentials;
+        private StorageClient storage;
+        private Grpc.Core.Channel channel;
         #endregion
 
         #region OCRVariables
         private const int requestCameraPermission = 1001;
-        public string result;
+        private string result;
         #endregion
 
         #region NetworkVariables
-        public static string[,] dataBase;
+        /// <summary>
+        /// A matrix string [wordName, wordDefinition]
+        /// </summary>
+        private static string[,] dataBase;
         public bool isConnected { get; set; }
-        public int wordCount;
+        /// <summary>
+        /// How many words there are in the JSON file
+        /// </summary>
+        private int wordCount;
         #endregion
 
         #endregion
@@ -114,6 +125,9 @@ namespace ArchaismDictionaryAndroidApp
             }
         }
 
+        /// <summary>
+        /// Displays a UI error screen
+        /// </summary>
         private void NetworkErrorScreen()
         {
             ErrorScreen();
@@ -122,7 +136,9 @@ namespace ArchaismDictionaryAndroidApp
         #endregion
 
         #region UIManager
-
+        /// <summary>
+        /// Assigns variable to XML counterpart
+        /// </summary>
         private void AssignUIVariables()
         {
             cameraView = FindViewById<SurfaceView>(Resource.Id.cameraView);
@@ -166,6 +182,9 @@ namespace ArchaismDictionaryAndroidApp
             OCRScreen();
         }
 
+        /// <summary>
+        /// When the user requests to take a picture via the user interface
+        /// </summary>
         private void TakePicture(object sender, EventArgs e)
         {
             LoadingScreen();
@@ -179,7 +198,10 @@ namespace ArchaismDictionaryAndroidApp
             searchWord.Text = arr[0];
         }
 
-
+        /// <summary>
+        /// This section deals with the UI after detecting a word from the dictionary or when the user wants to go back and scan another word.
+        /// </summary>
+        #region ScanningUI
         private void UnfreezeFrame(object sender, EventArgs e)
         {
             captureButton.Enabled = true;
@@ -197,6 +219,10 @@ namespace ArchaismDictionaryAndroidApp
             resultText.Alpha = 0;
         }
 
+        /// <summary>
+        /// This function is called by the TakePicture method from the main activity. This function freezes the camera frame
+        /// </summary>
+        /// <param name="bitmap">The camera frame which Google Cloud Vision gets</param>s
         private void FreezeFrame(Bitmap bitmap)
         {
             freezeFrameImage.Enabled = true;
@@ -216,7 +242,12 @@ namespace ArchaismDictionaryAndroidApp
             resultText.Alpha = 256;
             resultText.Text = result;
         }
+        #endregion
 
+        /// <summary>
+        /// Turns on and off the error screen when there is an error.
+        /// </summary>
+        #region ErrorUI
         private void ErrorScreen()
         {
             errorScreen.Enabled = true;
@@ -258,7 +289,12 @@ namespace ArchaismDictionaryAndroidApp
             errorScreen.Alpha = 0;
 
         }
+        #endregion
 
+        /// <summary>
+        /// Called from the main activity when the application needs to load
+        /// </summary>
+        #region LoadingScreen
         private void LoadingScreen()
         {
             loadingText.Enabled = true;
@@ -274,7 +310,12 @@ namespace ArchaismDictionaryAndroidApp
             loadingText.Alpha = 0;
             loadingImage.Alpha = 0;
         }
+        #endregion
 
+        /// <summary>
+        /// Assigns each of the buttons from the bottom bar navigation a corresponding function, to change between the main screens (OCR, Search, etc).
+        /// </summary>
+        #region BottomBarNavigation
         private void OCRScreenButton(object sender, EventArgs e)
         {
             OCRScreen();
@@ -331,11 +372,15 @@ namespace ArchaismDictionaryAndroidApp
             loadingText.Enabled = false;
             loadingText.Alpha = 0;
         }
+        #endregion
 
         #endregion
 
         #region Credentials
 
+        /// <summary>
+        /// Requests the usage of the camera by the user from the manifest file
+        /// </summary>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -353,6 +398,9 @@ namespace ArchaismDictionaryAndroidApp
             }
         }
 
+        /// <summary>
+        /// Creates the credentials that are needed for Cloud vision to operate
+        /// </summary>
         public void CreateGoogleCredentials()
         {
             string path = "44fe2d26dab6.json";
@@ -364,6 +412,7 @@ namespace ArchaismDictionaryAndroidApp
         }
         #endregion
 
+        //Creates the camera source and connects it to the user interface.
         #region SurfaceManager
 
         public void SurfaceChanged(ISurfaceHolder holder, [GeneratedEnum] Format format, int width, int height)
@@ -418,6 +467,11 @@ namespace ArchaismDictionaryAndroidApp
         #endregion
 
         #region OCR
+        /// <summary>
+        /// References Cloud Vision and through it recognizes the optical characters
+        /// </summary>
+        /// <param name="bytes">The image input</param>
+        /// <returns></returns>
         private string OCR(byte[] bytes)
         {
             var client = ImageAnnotatorClient.Create(channel);
@@ -440,6 +494,9 @@ namespace ArchaismDictionaryAndroidApp
             return result;
         }
 
+        /// <summary>
+        /// Starts scanning the picture which is requested from the TakePicture method
+        /// </summary>
         public void OnPictureTaken(byte[] data)
         {
             NotLoading();
@@ -470,6 +527,11 @@ namespace ArchaismDictionaryAndroidApp
         #endregion
 
         #region DictionaryManager
+        /// <summary>
+        /// Searches for a word inside of the Network manager's database matrix
+        /// </summary>
+        /// <param name="input">This is the input word which is searched for inside of the matrix</param>
+        /// <returns></returns>
         public static string FindWordInDictionary(string input)
         {
             string final = string.Empty;
@@ -511,6 +573,9 @@ namespace ArchaismDictionaryAndroidApp
             return final;
         }
 
+        /// <summary>
+        /// Reads the JSON file from the internet and assigns its values to the dictionary matrix
+        /// </summary>
         private void DictionaryManager()
         {
             string rawJSON;
@@ -533,12 +598,12 @@ namespace ArchaismDictionaryAndroidApp
             var list = JsonConvert.DeserializeObject<Dictionary.JSONClass>(rawJSON);
 
             wordCount = list.Property1[2].data.Length;
-            
+
             dataBase = new string[wordCount, 2];
 
             for (int i = 0; i < wordCount; i++)
             {
-                dataBase[i,0] = list.Property1[2].data[i].word;
+                dataBase[i, 0] = list.Property1[2].data[i].word;
                 dataBase[i, 1] = list.Property1[2].data[i].definition;
             }
         }
