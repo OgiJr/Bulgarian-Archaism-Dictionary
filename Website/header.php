@@ -6,6 +6,58 @@
     <title></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
     </script>
+    <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+      <script   src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"></script>
+
+      <link rel="stylesheet" href="https://cdn.rawgit.com/olifolkerd/tabulator/master/tabulator.css">
+      <script type="text/javascript" src="https://cdn.rawgit.com/olifolkerd/tabulator/master/tabulator.js"></script>
   </head>
 
   <body>
+
+    <div class="main-wrapper">
+    <header class="header">
+      <div class="logo">
+        <h1>BG Archaism</h1>
+      </div>
+      <div class="feature-content">
+        <h1>Речник на българския архаизъм</h1>
+
+        <a href="#" class="theme-btn btn-animated">Речник</a>
+      </div>
+    </header>
+
+    <div class="menu-icon">
+        <img src="https://img.icons8.com/cotton/2x/menu.png"/>
+     </div>
+
+    <div class="nav-bar">
+      <ul>
+        <li>
+          <a href="index.php">
+            Начална страница
+          </a>
+        </li>
+        <li>
+          <a href="words.php">
+            Думи
+          </a>
+        </li>
+        <li>
+          <a href="dictionary.php">
+            Речник
+          </a>
+        </li>
+        <li>
+          <a href="contact.php">
+            За нас
+          </a>
+        </li>
+        <li>
+          <a href="gplink">
+            Приложение
+          </a>
+        </li>
+      </ul>
+    </div>
+    </div>

@@ -2,18 +2,36 @@
     require "header.php";
 ?>
 
-    <h1>Свържете се с нас</h1>
-    <form class="cf">
-      <div class="half left cf">
-        <input type="text" id="input-name" placeholder="Име">
-        <input type="email" id="input-email" placeholder="E-mail">
-        <input type="text" id="input-subject" placeholder="Предмет">
+
+<main al>
+
+  <div class="user">
+    <header class="user__header">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg" alt="" />
+    </header>
+
+    <form class="form" action="contactform.php" method="post">
+      <div class="form__group">
+        <input type="text" name="name" placeholder="Име" class="form__input" />
       </div>
-      <div class="half right cf">
-        <textarea name="message" type="text" id="input-message" placeholder="Съобщение"></textarea>
+
+      <div class="form__group">
+        <input type="text" name="mail" placeholder="E-mail" class="form__input" />
       </div>
-      <input type="submit" value="Изпратете" id="input-submit">
+
+      <div class="form__group">
+        <input type="text" name="Subject" placeholder="Предмет" class="form__input" />
+      </div>
+
+      <div class="form__group">
+        <input type="message" name="message" placeholder="Съобщение" class="form__input" />
+      </div>
+
+      <button class="btnsignup" type="sumbit" name="submit">Изпрати</button>
     </form>
+  </div>
+
+</main>
 
     <p> “В българският език и литература се използват множество различни архаизми и диалекти. Те могат да затруднят учениците, които не ги разбират, но също така правят нашия език по-богат. Затова, те не могат да бъдат заменени, за да се улеснят произведенията.
 <br>През 2019г. бяха сменени 6000 архаични думи в „Под игото“ на Иван Вазов, което доведе до множество отзиви на различни новинарски компании и индивидуални създатели в Интернет пространството в полза на премахването на тези промени. Това ни вдъхнови да създадем това приложение.”
