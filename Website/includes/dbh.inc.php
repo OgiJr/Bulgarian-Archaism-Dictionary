@@ -7,7 +7,7 @@ $dBName = "archaism_dictionary";
 
 $conn = mysqli_connect($servername, $dBUsername, $dBPassword, $dBName);
 
-if (!$conn) {
+/*if (!$conn) {
   die("Свързването е неуспешно: ".mysqli_connect_error());
 }
 
@@ -22,6 +22,6 @@ echo "<tr><td>" . $row['id'] . "</td><td>" . $row['word'] . "</td><td>" . $row['
 
 echo "</table>"; //Close the table in HTML
 
-mysql_close();
+mysql_close();*/
 
  ?>

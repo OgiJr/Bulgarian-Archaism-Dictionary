@@ -2,36 +2,23 @@
     require "header.php";
 ?>
 
+<div class="user">
+								<header class="user__header">
+									<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg" alt="" />
+								</header>
 
-<main al>
+								<form class="form" action="includes/suggestedwords.inc.php" method="post">
+									<div class="form__group">
+										<input type="text" name="word" placeholder="Дума" class="form__input" />
+									</div>
 
-  <div class="user">
-    <header class="user__header">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg" alt="" />
-    </header>
+									<div class="form__group">
+										<input type="text" name="definition" placeholder="Дефиниция" class="form__input" />
+									</div>
 
-    <form class="form" action="includes/contactform.inc.php" method="post">
-      <div class="form__group">
-        <input type="text" name="name" placeholder="Име" class="form__input" />
-      </div>
-
-      <div class="form__group">
-        <input type="text" name="mail" placeholder="E-mail" class="form__input" />
-      </div>
-
-      <div class="form__group">
-        <input type="text" name="Subject" placeholder="Предмет" class="form__input" />
-      </div>
-
-      <div class="form__group">
-        <input type="message" name="message" placeholder="Съобщение" class="form__input" />
-      </div>
-
-      <button class="btnsignup" type="sumbit" name="submit">Изпрати</button>
-    </form>
-  </div>
-
-</main>
+									<button class="btnsignup" type="sumbit" name="word-submit">Изпратете</button>
+								</form>
+							</div>
 
     <p> “В българският език и литература се използват множество различни архаизми и диалекти. Те могат да затруднят учениците, които не ги разбират, но също така правят нашия език по-богат. Затова, те не могат да бъдат заменени, за да се улеснят произведенията.
 <br>През 2019г. бяха сменени 6000 архаични думи в „Под игото“ на Иван Вазов, което доведе до множество отзиви на различни новинарски компании и индивидуални създатели в Интернет пространството в полза на премахването на тези промени. Това ни вдъхнови да създадем това приложение.”
