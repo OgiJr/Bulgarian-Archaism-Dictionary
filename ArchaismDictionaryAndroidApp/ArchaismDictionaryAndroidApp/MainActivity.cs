@@ -1,29 +1,29 @@
-﻿using System;
+﻿using Android;
 using Android.App;
-using Android.OS;
-using Android.Runtime;
-using Android.Support.V7.App;
-using Android.Views;
-using Android.Widget;
+using Android.Content;
 using Android.Gms.Vision;
 using Android.Gms.Vision.Texts;
-using Android.Util;
 using Android.Graphics;
+using Android.Net;
+using Android.OS;
+using Android.Runtime;
 using Android.Support.V4.App;
-using Android;
-using System.IO;
-using Google.Cloud.Vision.V1;
+using Android.Support.V7.App;
+using Android.Util;
+using Android.Views;
+using Android.Widget;
+using ArchaismDictionaryAndroidApp.Network;
 using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Storage.V1;
+using Google.Cloud.Vision.V1;
 using Grpc.Auth;
-using System.Linq;
-using ArchaismDictionaryAndroidApp.Network;
-using Android.Net;
-using Android.Content;
-using Xamarin.Essentials;
-using Android.Content.Res;
 using Newtonsoft.Json;
-
+using System;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using Xamarin.Essentials;
 
 namespace ArchaismDictionaryAndroidApp
 {
@@ -271,6 +271,7 @@ namespace ArchaismDictionaryAndroidApp
         {
             CreateGoogleCredentials();
             CreateCameraSource();
+            DictionaryManager();
 
             cameraView.Enabled = true;
             cameraView.Alpha = 256;
@@ -287,7 +288,6 @@ namespace ArchaismDictionaryAndroidApp
             retry.Alpha = 0;
             errorScreen.Enabled = false;
             errorScreen.Alpha = 0;
-
         }
         #endregion
 
@@ -579,19 +579,13 @@ namespace ArchaismDictionaryAndroidApp
         private void DictionaryManager()
         {
             string rawJSON;
-
-            #region Simulates downloading a json file
             const string fileName = "dictionary.json";
             string jsonRead;
-            AssetManager assets = this.Assets;
-            using (StreamReader sr = new StreamReader(assets.Open(fileName)))
-            {
-                jsonRead = sr.ReadToEnd();
-            }
-            #endregion
+
+            WebClient client = new WebClient();
+            jsonRead = client.DownloadString("http://archaismdictionary.bg/dictionary.json");;
 
             File.WriteAllText(FileSystem.AppDataDirectory + fileName, jsonRead);
-
 
             rawJSON = File.ReadAllText(FileSystem.AppDataDirectory + fileName);
 
@@ -607,7 +601,6 @@ namespace ArchaismDictionaryAndroidApp
                 dataBase[i, 1] = list.Property1[2].data[i].definition;
             }
         }
-        #endregion
-
     }
 }
+#endregion
