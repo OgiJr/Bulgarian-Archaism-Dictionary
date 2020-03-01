@@ -95,6 +95,7 @@ html {
     width: 100%;
     height: 100%;
     display: none;
+    z-index: 10;
 }
 
 .nav-bar ul {
@@ -105,11 +106,13 @@ html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 10;
 }
 
 .nav-bar ul li {
     display: block;
     text-align: center;
+    z-index: 10;
 }
 
 .nav-bar ul li a {
@@ -117,10 +120,12 @@ html {
     color: #000;
     font-size: 3.5rem;
     transition: all 0.3s ease;
+    z-index: 10;
 }
 
 .nav-bar ul li a:hover {
     color: #777;
+    z-index: 10;
 }
 
 .main-wrapper {
@@ -672,3 +677,5 @@ form textarea {
         background-position: 0 0
     }
 }
+
+/*-----------------------*/
