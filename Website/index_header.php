@@ -14,11 +14,13 @@
     <script type="text/javascript" src="https://cdn.rawgit.com/olifolkerd/tabulator/master/tabulator.js"></script>
 </head>
 
-<body class="body2">
+<body class="body1">
 
-    <div class="wrapper2">
-        <header class="header1">
-
+    <div class="main-wrapper">
+        <header class="header">
+            <div class="logo">
+                <h1>BG Archaism</h1>
+            </div>
             <div class="feature-content">
                 <h1>Речник на българския архаизъм</h1>
 
@@ -30,21 +32,6 @@
                 <a href="#" class="theme-btn btn-animated">Приложение</a>
             </div>
         </header>
-
-        <div class="user">
-            <header class="user__header">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg" alt="" />
-            </header>
-
-            <form class="form" action="includes/search_word" method="post">
-                <div class="form__group">
-                    <input type="text" name="search_word" placeholder="Дума" class="form__input" />
-                </div>
-                <br>
-                <button class="btnsignup" type="sumbit" name="word-submit">Потърсете</button>
-            </form>
-            <p $name="search_result"></p>
-        </div>
 
         <div class="menu-icon">
             <img src="https://img.icons8.com/cotton/2x/menu.png" />
@@ -80,7 +67,3 @@
             </ul>
         </div>
     </div>
-
-    <?php
-    require "footer.php";
-?>

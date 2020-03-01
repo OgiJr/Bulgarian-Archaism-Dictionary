@@ -1,8 +1,6 @@
 <?php
-    require "header.php";
+    require "index_header.php";
 ?>
-
-
 
   <?php
       require "footer.php";
