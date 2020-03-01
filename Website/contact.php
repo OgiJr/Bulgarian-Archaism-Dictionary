@@ -53,7 +53,7 @@
                     <textarea cols="40" type="message" name="message" placeholder="Съобщение" class="form__input"></textarea>
                 </div>
                 <br>
-                <button class="btnsignup" type="sumbit" name="submit">Изпрати</button>
+                <button class="btnsignup" type="sumbit" name="submit">Изпратете</button>
             </form>
         </div>
 
