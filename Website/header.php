@@ -1,3 +1,4 @@
+<!-- Header for other pages !-->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -12,45 +13,18 @@
 
     <link rel="stylesheet" href="https://cdn.rawgit.com/olifolkerd/tabulator/master/tabulator.css">
     <script type="text/javascript" src="https://cdn.rawgit.com/olifolkerd/tabulator/master/tabulator.js"></script>
-<style>
-    table {
-      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 15px;
-    }
-
-    table td, table th {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
-
-    table tr:nth-child(even){background-color: #f2f2f2;}
-
-    table tr:hover {background-color: #ddd;}
-
-    table th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: left;
-      background-color: #a395a5;
-      color: white;
-    }
-    </style>
-
 </head>
 
-<body class="body1">
+<body class="body2">
 
     <div class="main-wrapper">
-        <header class="header">
-            <div class="logo">
-                <h1>BG Archaism</h1>
-            </div>
+        <header class="header1">
+
             <div class="feature-content">
                 <h1>Речник на българския архаизъм</h1>
 
                 <!-- Added more buttons for header and space between them. !-->
+                <a href="index.php" class="theme-btn btn-animated">Начална страница</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 <a href="dictionary.php" class="theme-btn btn-animated">Речник</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 <a href="words.php" class="theme-btn btn-animated">Добави дума</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 <a href="about.php" class="theme-btn btn-animated">За нас</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -86,7 +60,7 @@
           </a>
                 </li>
                 <li>
-                    <a href="https://play.google.com/store/apps/details?id=com.archaism.dictionary">
+                    <a href="index.php">
             Приложение
           </a>
                 </li>

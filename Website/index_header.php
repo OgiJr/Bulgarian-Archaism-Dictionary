@@ -1,7 +1,3 @@
-<?php
-    include 'includes/dbh.inc.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -13,16 +9,18 @@
     </script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
-
+	<link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="https://cdn.rawgit.com/olifolkerd/tabulator/master/tabulator.css">
     <script type="text/javascript" src="https://cdn.rawgit.com/olifolkerd/tabulator/master/tabulator.js"></script>
 </head>
 
-<body class="body2">
+<body class="body1">
 
-    <div class="wrapper2">
-        <header class="header1">
-
+    <div class="main-wrapper">
+        <header class="header">
+            <div class="logo">
+                <h1>BG Archaism</h1>
+            </div>
             <div class="feature-content">
                 <h1>Речник на българския архаизъм</h1>
 
@@ -34,26 +32,6 @@
                 <a href="https://play.google.com/store/apps/details?id=com.archaism.dictionary" class="theme-btn btn-animated">Приложение</a>
             </div>
         </header>
-
-			<?php
-			$servername = "localhost:3306";
-			$dBUsername = "archaism_app";
-			$dBPassword = "DictionaryOfArchaism123";
-			$dBName = "archaism_dictionary";
-
-			$conn = mysqli_connect($servername, $dBUsername, $dBPassword, $dBName);
-
-			$sqlQuery = "SELECT word, definition FROM dictionary";
-			$qry = $conn->query($sqlQuery);
-
-			echo "<br><center><table id='myTable'><tr><th></th><th></th></tr>";
-			while($row = $qry->fetch_assoc()){
-			echo "<tr><td>"."</td><td>".$row["word"]."</td><td>".$row["definition"]."</td><td></tr>";
-			}
-
-			echo "</table></center>";
-
-			?>
 
         <div class="menu-icon">
             <img src="https://img.icons8.com/cotton/2x/menu.png" />
@@ -89,7 +67,3 @@
             </ul>
         </div>
     </div>
-
-    <?php
-    require "footer.php";
-?>
