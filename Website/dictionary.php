@@ -35,25 +35,48 @@
             </div>
         </header>
 
+		<div class="user">
+
 			<?php
 			$servername = "localhost:3306";
 			$dBUsername = "archaism_app";
 			$dBPassword = "DictionaryOfArchaism123";
 			$dBName = "archaism_dictionary";
 
-			$conn = mysqli_connect($servername, $dBUsername, $dBPassword, $dBName);
+			$con = new PDO("mysql:host=localhost:3306;dbname=archaism_dictionary", "archaism_app", "DictionaryOfArchaism123");
 
-			$sqlQuery = "SELECT word, definition FROM dictionary";
-			$qry = $conn->query($sqlQuery);
+			$word = $_GET['word'];
 
-			echo "<br><center><table id='myTable'><tr><th></th><th></th></tr>";
-			while($row = $qry->fetch_assoc()){
-			echo "<tr><td>"."</td><td>".$row["word"]."</td><td>".$row["definition"]."</td><td></tr>";
+			$sqlQuery = "SELECT word,definition FROM dictionary WHERE word = '$word' ";
+
+			$sth = $con->prepare($sqlQuery);
+
+			$sth -> setFetchMode(PDO:: FETCH_OBJ);
+			$sth -> execute();
+
+			if($row = $sth -> fetch())
+			{
+			$wordFinal = $row -> word;
+			$defFinal = $row -> definition;
+
+			echo "<h1> $wordFinal </h1> <h2> $defFinal </h2><br><br><br><br>";
 			}
 
-			echo "</table></center>";
-
 			?>
+
+            <header class="user__header">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg" alt="" />
+            </header>
+
+            <form class="form" action="dictionary.php" method="SEARCH">
+                <div class="form__group">
+                    <input type="text" name="word" placeholder="Дума" class="form__input" />
+                </div>
+                <br>
+                <input type ="submit" class="btnsignup"></input>
+            </form>
+
+        </div>
 
         <div class="menu-icon">
             <img src="https://img.icons8.com/cotton/2x/menu.png" />
