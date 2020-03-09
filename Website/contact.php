@@ -81,16 +81,21 @@
             Речник
           </a>
                     </li>
-                    <li>
-                        <a href="contact.php">
-            За нас
-          </a>
-                    </li>
-                    <li>
-                        <a href="index.php">
-            Приложение
-          </a>
-                    </li>
+					<li>
+	                    <a href="about.php">
+	            За нас
+	          </a>
+	                </li>
+					<li>
+						<a href="contact.php">
+				Контакт
+			  </a>
+					</li>
+	                <li>
+	                    <a href="https://play.google.com/store/apps/details?id=com.archaism.dictionary">
+	            Приложение
+	          </a>
+	                </li>
                 </ul>
             </div>
         </div>
