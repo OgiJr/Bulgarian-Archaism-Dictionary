@@ -38,12 +38,7 @@
 		<div class="user">
 
 			<?php
-			$servername = "localhost:3306";
-			$dBUsername = "archaism_app";
-			$dBPassword = "DictionaryOfArchaism123";
-			$dBName = "archaism_dictionary";
-
-			$con = new PDO("mysql:host=localhost:3306;dbname=archaism_dictionary", "archaism_app", "DictionaryOfArchaism123");
+			include("includes/search_word.php");
 
 			$word = $_GET['word'];
 
@@ -73,7 +68,7 @@
                     <input type="text" name="word" placeholder="Дума" class="form__input" />
                 </div>
                 <br>
-                <input type ="submit" class="btnsignup"></input>
+                <input type ="submit" class="btnsignup" value = "Потърсете"></input>
             </form>
 
         </div>
@@ -99,13 +94,18 @@
             Речник
           </a>
                 </li>
-                <li>
-                    <a href="contact.php">
+				<li>
+                    <a href="about.php">
             За нас
           </a>
                 </li>
+				<li>
+					<a href="contact.php">
+			Контакт
+		  </a>
+				</li>
                 <li>
-                    <a href="index.php">
+                    <a href="https://play.google.com/store/apps/details?id=com.archaism.dictionary">
             Приложение
           </a>
                 </li>

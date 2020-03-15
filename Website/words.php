@@ -77,12 +77,17 @@
           </a>
                 </li>
                 <li>
-                    <a href="contact.php">
+                    <a href="about.php">
             За нас
           </a>
                 </li>
+				<li>
+					<a href="contact.php">
+			Контакт
+		  </a>
+				</li>
                 <li>
-                    <a href="index.php">
+                    <a href="https://play.google.com/store/apps/details?id=com.archaism.dictionary">
             Приложение
           </a>
                 </li>
