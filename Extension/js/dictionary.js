@@ -2,8 +2,8 @@ var contextMenus = {};
 
 contextMenus.searchDictionary = 
     chrome.contextMenus.create(
-        {"title":"Потърсете в речника",
-        "contexts" : ["all"]
+        {"title":"Потърсете в архаичния речник",
+        "contexts" : ["page", "frame"]
         },
         function (){
             if(chrome.runtime.lastError){
@@ -26,3 +26,14 @@ function contextMenuHandler(info){
         })()
     }
 }
+
+searchWord = function(word){
+    var query = word.selectionText;
+    window.open('http://archaismdictionary.bg/dictionary.php?word='+query);
+}
+
+chrome.contextMenus.create({
+title: "Сканиране на архаичната дума",
+contexts:["selection", "editable"],
+onclick: searchWord
+});

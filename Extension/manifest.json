@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Речник на архаизма",
-    "version": "1.0",
+    "version": "1.1",
     "description": "Дава дефиницията на избрана от Вас архаична дума.",
 
     "background": {
