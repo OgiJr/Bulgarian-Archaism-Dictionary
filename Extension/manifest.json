@@ -10,10 +10,9 @@
       },
 
       "permissions": [
-         "contextMenus",
-         "activeTab"
+         "contextMenus"
        ],
-       
+
        "icons": {
         "16": "icons/icon16x16.png",
         "48": "icons/icon48x48.png",
