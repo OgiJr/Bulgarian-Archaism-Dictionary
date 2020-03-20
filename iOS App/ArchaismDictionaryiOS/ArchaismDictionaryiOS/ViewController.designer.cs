@@ -9,9 +9,9 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 
-namespace Archaism_Dictionary_iOS_App
+namespace ArchaismDictionaryiOS
 {
-    [Register ("ViewController")]
+    [Register("ViewController")]
     partial class ViewController
     {
     }

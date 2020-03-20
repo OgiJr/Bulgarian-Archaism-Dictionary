@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDisplayName</key>
-    <string>Archaism_Dictionary_iOS_App</string>
+    <string>ArchaismDictionaryiOS</string>
     <key>CFBundleIdentifier</key>
-    <string>com.companyname.Archaism_Dictionary_iOS_App</string>
+    <string>bg.archaism.dictionary.Archaism-Dictionary-iOS</string>
     <key>CFBundleShortVersionString</key>
     <string>1.0</string>
     <key>CFBundleVersion</key>
@@ -32,7 +32,7 @@
         </dict>
     </dict>
     <key>MinimumOSVersion</key>
-        <string>11.2</string>
+        <string>13.3</string>
     <key>UIDeviceFamily</key>
     <array>
         <integer>1</integer>
