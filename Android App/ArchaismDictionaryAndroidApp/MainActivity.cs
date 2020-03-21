@@ -452,9 +452,9 @@ namespace ArchaismDictionaryAndroidApp
         {
             TesseractApi api;
             api = new TesseractApi(this, AssetsDeployment.OncePerInitialization);
-            
-            await api.Init("bul");
-            await api.SetImage(bytes);
+
+            await api.Init("bul").ConfigureAwait(false); ;
+            await api.SetImage(bytes).ConfigureAwait(false); ;
 
             var detectedText = api.Results(PageIteratorLevel.Block);
 

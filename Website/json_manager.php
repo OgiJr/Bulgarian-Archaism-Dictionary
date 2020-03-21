@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-</head>
-
-<body>
-
 <?php
 $sql = "SELECT * FROM `dictionary`";
 
@@ -17,15 +8,26 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->fetchAll();
 
-$pre = "{
-	Property1: \n";
+$pre = '{
+	"Property1": [
+		{
+			"type": "header",
+			"version": "4.8.3",
+			"comment": "Export to JSON plugin for PHPMyAdmin"
+		},
+		{
+			"type": "database",
+			"name": "archaism_dictionary"
+		},
+		{
+			"type": "table",
+			"name": "dictionary",
+			"database": "archaism_dictionary",
+			"data":';
 $during = json_encode($result, JSON_UNESCAPED_UNICODE);
-$after = "\n }";
+$after = "}]}";
 
 echo $pre;
 echo $during;
 echo $after;
 ?>
-
-</body>
-</html>
