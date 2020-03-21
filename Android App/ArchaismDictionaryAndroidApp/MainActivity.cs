@@ -561,7 +561,7 @@ namespace ArchaismDictionaryAndroidApp
             string jsonRead;
 
             WebClient client = new WebClient();
-            jsonRead = client.DownloadString("http://archaismdictionary.bg/dictionary.json");;
+            jsonRead = client.DownloadString("http://archaismdictionary.bg/json_manager.php");;
 
             File.WriteAllText(FileSystem.AppDataDirectory + fileName, jsonRead);
 
