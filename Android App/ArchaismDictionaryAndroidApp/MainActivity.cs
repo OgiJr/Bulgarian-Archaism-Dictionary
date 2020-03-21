@@ -13,16 +13,13 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using ArchaismDictionaryAndroidApp.Network;
-using Google.Apis.Auth.OAuth2;
-using Google.Cloud.Storage.V1;
-using Google.Cloud.Vision.V1;
-using Grpc.Auth;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
 using System.Net;
 using Xamarin.Essentials;
+using Tesseract.Droid;
 
 namespace ArchaismDictionaryAndroidApp
 {
@@ -48,6 +45,7 @@ namespace ArchaismDictionaryAndroidApp
         private Android.Support.Design.Internal.BottomNavigationItemView bottomBarDict;
         private Android.Support.Design.Internal.BottomNavigationItemView bottomBarOCR;
         #endregion
+
         /// <summary>
         ///  UI elements which are displayed on the Search page
         ///  /// </summary>
@@ -57,12 +55,6 @@ namespace ArchaismDictionaryAndroidApp
         private TextView searchWord;
         private TextView searchDefinition;
         private Button search;
-        #endregion
-
-        #region GoogleCredentialVariables
-        private GoogleCredential credentials;
-        private StorageClient storage;
-        private Grpc.Core.Channel channel;
         #endregion
 
         #region OCRVariables
@@ -97,7 +89,6 @@ namespace ArchaismDictionaryAndroidApp
             if (isConnected == true)
             {
                 DictionaryManager();
-                CreateGoogleCredentials();
                 CreateCameraSource();
             }
             else
@@ -221,7 +212,7 @@ namespace ArchaismDictionaryAndroidApp
         /// <summary>
         /// This function is called by the TakePicture method from the main activity. This function freezes the camera frame
         /// </summary>
-        /// <param name="bitmap">The camera frame which Google Cloud Vision gets</param>s
+        /// <param name="bitmap">The camera frame which OCR is performed on.</param>s
         private void FreezeFrame(Bitmap bitmap)
         {
             freezeFrameImage.Enabled = true;
@@ -268,7 +259,6 @@ namespace ArchaismDictionaryAndroidApp
 
         private void RemoveErrorScreen(object sender, EventArgs e)
         {
-            CreateGoogleCredentials();
             CreateCameraSource();
             DictionaryManager();
 
@@ -396,19 +386,6 @@ namespace ArchaismDictionaryAndroidApp
                     break;
             }
         }
-
-        /// <summary>
-        /// Creates the credentials that are needed for Cloud vision to operate
-        /// </summary>
-        public void CreateGoogleCredentials()
-        {
-            string path = "44fe2d26dab6.json";
-            Stream stream = Application.Context.Assets.Open(path);
-
-            credentials = GoogleCredential.FromStream(stream);
-            storage = StorageClient.Create(credentials);
-            channel = new Grpc.Core.Channel(ImageAnnotatorClient.DefaultEndpoint.ToString(), credentials.ToChannelCredentials());
-        }
         #endregion
 
         //Creates the camera source and connects it to the user interface.
@@ -467,26 +444,27 @@ namespace ArchaismDictionaryAndroidApp
 
         #region OCR
         /// <summary>
-        /// References Cloud Vision and through it recognizes the optical characters
+        /// References Tesseract and through it recognizes the optical characters
         /// </summary>
         /// <param name="bytes">The image input</param>
         /// <returns></returns>
-        private string OCR(byte[] bytes)
+        private async System.Threading.Tasks.Task<string> OCRAsync(byte[] bytes)
         {
-            var client = ImageAnnotatorClient.Create(channel);
-            var img = Image.FromBytes(bytes);
-            var response = client.DetectText(img);
+            TesseractApi api;
+            api = new TesseractApi(this, AssetsDeployment.OncePerInitialization);
+            
+            await api.Init("bul");
+            await api.SetImage(bytes);
+
+            var detectedText = api.Results(PageIteratorLevel.Block);
 
             result = string.Empty;
 
-            if (response != null)
+            if (detectedText != null)
             {
-                foreach (var annotation in response)
+                foreach (var annotation in detectedText)
                 {
-                    if (annotation.Description != null && result == string.Empty)
-                    {
-                        result = FindWordInDictionary(annotation.Description);
-                    }
+                        result = FindWordInDictionary(annotation.Text);
                 }
             }
 
@@ -503,7 +481,8 @@ namespace ArchaismDictionaryAndroidApp
 
             if (isConnected == true)
             {
-                result = OCR(data);
+                var task = OCRAsync(data);
+                result = task.Result;
 
                 if (result != string.Empty)
                 {
