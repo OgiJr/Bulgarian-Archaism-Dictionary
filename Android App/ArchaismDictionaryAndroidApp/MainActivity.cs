@@ -20,6 +20,9 @@ using System.Linq;
 using System.Net;
 using Xamarin.Essentials;
 using Tesseract.Droid;
+using Nito.AsyncEx;
+using Android.Content.Res;
+using Android.Content.PM;
 
 namespace ArchaismDictionaryAndroidApp
 {
@@ -60,6 +63,7 @@ namespace ArchaismDictionaryAndroidApp
         #region OCRVariables
         private const int requestCameraPermission = 1001;
         private string result;
+        private TesseractApi api;
         #endregion
 
         #region NetworkVariables
@@ -90,6 +94,7 @@ namespace ArchaismDictionaryAndroidApp
             {
                 DictionaryManager();
                 CreateCameraSource();
+                AsyncContext.Run(CreateOCR);
             }
             else
             {
@@ -372,8 +377,7 @@ namespace ArchaismDictionaryAndroidApp
         /// </summary>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
+            Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             switch (requestCode)
@@ -443,6 +447,49 @@ namespace ArchaismDictionaryAndroidApp
         #endregion
 
         #region OCR
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private async System.Threading.Tasks.Task CreateOCR()
+        {
+            if (ActivityCompat.CheckSelfPermission(ApplicationContext, Manifest.Permission.ReadExternalStorage) != Android.Content.PM.Permission.Granted)
+            {
+                ActivityCompat.RequestPermissions(this, new string[]{
+                Android.Manifest.Permission.ReadExternalStorage
+                }, 0);
+                return;
+            }
+
+            if (ActivityCompat.CheckSelfPermission(ApplicationContext, Manifest.Permission.WriteExternalStorage) != Android.Content.PM.Permission.Granted)
+            {
+                ActivityCompat.RequestPermissions(this, new string[]{
+                Android.Manifest.Permission.WriteExternalStorage
+                }, 0);
+                return;
+            }
+
+            string pathToDataFolder = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/tessdata";
+            string pathToDataFile = pathToDataFolder + "/bul.traineddata";
+            Directory.CreateDirectory(pathToDataFolder);
+
+            string content;
+            AssetManager assets = this.Assets;
+
+            using (StreamReader sr = new StreamReader(assets.Open("tessdata/bul.traineddata")))
+            {
+                content = sr.ReadToEnd();
+            }
+
+            using (StreamWriter sr = new StreamWriter(pathToDataFile))
+            {
+                sr.Write(content);
+            }
+
+            api = new TesseractApi(this, AssetsDeployment.OncePerInitialization);
+            await api.Init(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, "bul");
+        }
+
         /// <summary>
         /// References Tesseract and through it recognizes the optical characters
         /// </summary>
@@ -450,11 +497,7 @@ namespace ArchaismDictionaryAndroidApp
         /// <returns></returns>
         private async System.Threading.Tasks.Task<string> OCRAsync(byte[] bytes)
         {
-            TesseractApi api;
-            api = new TesseractApi(this, AssetsDeployment.OncePerInitialization);
-
-            await api.Init("bul").ConfigureAwait(false); ;
-            await api.SetImage(bytes).ConfigureAwait(false); ;
+            await api.SetImage(bytes);
 
             var detectedText = api.Results(PageIteratorLevel.Block);
 
@@ -464,7 +507,7 @@ namespace ArchaismDictionaryAndroidApp
             {
                 foreach (var annotation in detectedText)
                 {
-                        result = FindWordInDictionary(annotation.Text);
+                    result = FindWordInDictionary(annotation.Text);
                 }
             }
 
@@ -561,7 +604,7 @@ namespace ArchaismDictionaryAndroidApp
             string jsonRead;
 
             WebClient client = new WebClient();
-            jsonRead = client.DownloadString("http://archaismdictionary.bg/json_manager.php");;
+            jsonRead = client.DownloadString("http://archaismdictionary.bg/json_manager.php"); ;
 
             File.WriteAllText(FileSystem.AppDataDirectory + fileName, jsonRead);
 
