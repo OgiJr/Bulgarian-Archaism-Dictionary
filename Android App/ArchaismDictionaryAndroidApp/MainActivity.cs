@@ -13,16 +13,16 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using ArchaismDictionaryAndroidApp.Network;
+using Google.Apis.Auth.OAuth2;
+using Google.Cloud.Storage.V1;
+using Google.Cloud.Vision.V1;
+using Grpc.Auth;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
 using System.Net;
 using Xamarin.Essentials;
-using Tesseract.Droid;
-using Nito.AsyncEx;
-using Android.Content.Res;
-using Android.Content.PM;
 
 namespace ArchaismDictionaryAndroidApp
 {
@@ -48,7 +48,6 @@ namespace ArchaismDictionaryAndroidApp
         private Android.Support.Design.Internal.BottomNavigationItemView bottomBarDict;
         private Android.Support.Design.Internal.BottomNavigationItemView bottomBarOCR;
         #endregion
-
         /// <summary>
         ///  UI elements which are displayed on the Search page
         ///  /// </summary>
@@ -60,10 +59,16 @@ namespace ArchaismDictionaryAndroidApp
         private Button search;
         #endregion
 
+        #region GoogleCredentialVariables
+        private GoogleCredential credentials;
+        private StorageClient storage;
+        private Grpc.Core.Channel channel;
+        #endregion
+
         #region OCRVariables
         private const int requestCameraPermission = 1001;
         private string result;
-        private TesseractApi api;
+        ImageAnnotatorClient client;
         #endregion
 
         #region NetworkVariables
@@ -93,8 +98,9 @@ namespace ArchaismDictionaryAndroidApp
             if (isConnected == true)
             {
                 DictionaryManager();
+                CreateGoogleCredentials();
                 CreateCameraSource();
-                AsyncContext.Run(CreateOCR);
+                client = ImageAnnotatorClient.Create(channel);
             }
             else
             {
@@ -217,7 +223,7 @@ namespace ArchaismDictionaryAndroidApp
         /// <summary>
         /// This function is called by the TakePicture method from the main activity. This function freezes the camera frame
         /// </summary>
-        /// <param name="bitmap">The camera frame which OCR is performed on.</param>s
+        /// <param name="bitmap">The camera frame which Google Cloud Vision gets</param>s
         private void FreezeFrame(Bitmap bitmap)
         {
             freezeFrameImage.Enabled = true;
@@ -264,6 +270,7 @@ namespace ArchaismDictionaryAndroidApp
 
         private void RemoveErrorScreen(object sender, EventArgs e)
         {
+            CreateGoogleCredentials();
             CreateCameraSource();
             DictionaryManager();
 
@@ -377,7 +384,8 @@ namespace ArchaismDictionaryAndroidApp
         /// </summary>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             switch (requestCode)
@@ -389,6 +397,19 @@ namespace ArchaismDictionaryAndroidApp
                     }
                     break;
             }
+        }
+
+        /// <summary>
+        /// Creates the credentials that are needed for Cloud vision to operate
+        /// </summary>
+        public void CreateGoogleCredentials()
+        {
+            string path = "44fe2d26dab6.json";
+            Stream stream = Application.Context.Assets.Open(path);
+
+            credentials = GoogleCredential.FromStream(stream);
+            storage = StorageClient.Create(credentials);
+            channel = new Grpc.Core.Channel(ImageAnnotatorClient.DefaultEndpoint.ToString(), credentials.ToChannelCredentials());
         }
         #endregion
 
@@ -447,67 +468,26 @@ namespace ArchaismDictionaryAndroidApp
         #endregion
 
         #region OCR
-
         /// <summary>
-        /// 
-        /// </summary>
-        private async System.Threading.Tasks.Task CreateOCR()
-        {
-            if (ActivityCompat.CheckSelfPermission(ApplicationContext, Manifest.Permission.ReadExternalStorage) != Android.Content.PM.Permission.Granted)
-            {
-                ActivityCompat.RequestPermissions(this, new string[]{
-                Android.Manifest.Permission.ReadExternalStorage
-                }, 0);
-                return;
-            }
-
-            if (ActivityCompat.CheckSelfPermission(ApplicationContext, Manifest.Permission.WriteExternalStorage) != Android.Content.PM.Permission.Granted)
-            {
-                ActivityCompat.RequestPermissions(this, new string[]{
-                Android.Manifest.Permission.WriteExternalStorage
-                }, 0);
-                return;
-            }
-
-            string pathToDataFolder = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/tessdata";
-            string pathToDataFile = pathToDataFolder + "/bul.traineddata";
-            Directory.CreateDirectory(pathToDataFolder);
-
-            string content;
-            AssetManager assets = this.Assets;
-
-            using (StreamReader sr = new StreamReader(assets.Open("tessdata/bul.traineddata")))
-            {
-                content = sr.ReadToEnd();
-            }
-
-            using (StreamWriter sr = new StreamWriter(pathToDataFile))
-            {
-                sr.Write(content);
-            }
-
-            api = new TesseractApi(this, AssetsDeployment.OncePerInitialization);
-            await api.Init(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, "bul");
-        }
-
-        /// <summary>
-        /// References Tesseract and through it recognizes the optical characters
+        /// References Cloud Vision and through it recognizes the optical characters
         /// </summary>
         /// <param name="bytes">The image input</param>
         /// <returns></returns>
-        private async System.Threading.Tasks.Task<string> OCRAsync(byte[] bytes)
+        private string OCR(byte[] bytes)
         {
-            await api.SetImage(bytes);
-
-            var detectedText = api.Results(PageIteratorLevel.Block);
+            var img = Image.FromBytes(bytes);
+            var response = client.DetectText(img);
 
             result = string.Empty;
 
-            if (detectedText != null)
+            if (response != null)
             {
-                foreach (var annotation in detectedText)
+                foreach (var annotation in response)
                 {
-                    result = FindWordInDictionary(annotation.Text);
+                    if (annotation.Description != null && result == string.Empty)
+                    {
+                        result = FindWordInDictionary(annotation.Description);
+                    }
                 }
             }
 
@@ -524,8 +504,7 @@ namespace ArchaismDictionaryAndroidApp
 
             if (isConnected == true)
             {
-                var task = OCRAsync(data);
-                result = task.Result;
+                result = OCR(data);
 
                 if (result != string.Empty)
                 {
@@ -604,7 +583,7 @@ namespace ArchaismDictionaryAndroidApp
             string jsonRead;
 
             WebClient client = new WebClient();
-            jsonRead = client.DownloadString("http://archaismdictionary.bg/json_manager.php"); ;
+            jsonRead = client.DownloadString("http://archaismdictionary.bg/json_manager.php");;
 
             File.WriteAllText(FileSystem.AppDataDirectory + fileName, jsonRead);
 
