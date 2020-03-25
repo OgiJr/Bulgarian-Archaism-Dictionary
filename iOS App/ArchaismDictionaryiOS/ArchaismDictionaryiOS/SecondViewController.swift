@@ -11,7 +11,7 @@ import Foundation
 
 class SecondViewController: UIViewController {
 
-  var dataBase = [[String]]()
+    var dataBase = [[String]]()
     
     struct Welcome: Codable {
         let property1: [Property1]
@@ -67,7 +67,7 @@ class SecondViewController: UIViewController {
             dataBase = Array(repeating: Array(repeating: "default", count: 2), count: size!)
             
             for number in count{
-                      dataBase[number][0] = dataParsed.property1[2].data?[0].word ?? "<no word>"
+                      dataBase[number][0] = dataParsed.property1[2].data?[number].word ?? "<no word>"
                       dataBase[number][1] = dataParsed.property1[2].data?[number].definition ?? "<no word>"
             }
         }
@@ -75,8 +75,25 @@ class SecondViewController: UIViewController {
             print("Error: \(error)")
         }
     }
+    
+    func SearchInDictionary(input: String) -> String{
+        let size = dataBase.count
+        let count = 0...size - 1
+        var result: String = ""
+        
+        for number in count{
+            if(input.lowercased() == dataBase[number][0].lowercased()){
+                result = dataBase[number][0] + " " + dataBase[number][1]
+            }
+            else if result.isEmpty{
+                    if(input.lowercased().contains(dataBase[number][0].lowercased())){
+                        result = dataBase[number][0] + " " + dataBase[number][1]
+                    }
+                }
 }
-
+        return result
+    }
+    
 class JSONNull: Codable, Hashable {
 
     public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
@@ -100,4 +117,5 @@ class JSONNull: Codable, Hashable {
         var container = encoder.singleValueContainer()
         try container.encodeNil()
     }
+}
 }
