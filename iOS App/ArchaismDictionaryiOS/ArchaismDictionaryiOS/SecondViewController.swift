@@ -60,7 +60,16 @@ class SecondViewController: UIViewController {
             let data = Data(jsonString.utf8)
             let decoder = JSONDecoder()
             let dataParsed = try decoder.decode(Welcome.self, from: data)
-            print(dataParsed.property1[2].data![0].word ?? "<no word>")
+            
+            let size = dataParsed.property1[2].data?.count
+            let count = 0...size! - 1
+            
+            dataBase = Array(repeating: Array(repeating: "default", count: 2), count: size!)
+            
+            for number in count{
+                      dataBase[number][0] = dataParsed.property1[2].data?[0].word ?? "<no word>"
+                      dataBase[number][1] = dataParsed.property1[2].data?[number].definition ?? "<no word>"
+            }
         }
         catch let error as NSError{
             print("Error: \(error)")
