@@ -74,8 +74,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="Въведетедума:" destination="8rJ-Kc-sve" eventType="editingDidEnd" id="a1F-oi-PaQ"/>
-                                    <action selector="Въведидума:" destination="8rJ-Kc-sve" eventType="touchUpOutside" id="omw-99-cUV"/>
                                     <action selector="Потърси:" destination="8rJ-Kc-sve" eventType="editingDidEnd" id="Rkv-sV-WjU"/>
                                 </connections>
                             </textField>
