@@ -91,7 +91,23 @@ class SecondViewController: UIViewController {
                     }
                 }
 }
+        print(result)
         return result
+    }
+    
+    @IBOutlet weak var Label: UILabel!
+    @IBOutlet weak var Въведете: UITextField!
+    @IBOutlet weak var Значение: UILabel!
+    
+    @IBAction func Потърси(_ sender: Any) {
+        if(Въведете.text != nil){
+            let result = SearchInDictionary(input: Въведете.text!)
+            if !result.isEmpty{
+            let resultArr = result.split{$0 == " "}.map(String.init)
+            Значение.text = resultArr[1]
+            Label.text = resultArr[0]
+            }
+        }
     }
     
 class JSONNull: Codable, Hashable {
