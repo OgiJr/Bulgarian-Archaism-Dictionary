@@ -104,8 +104,8 @@ class SecondViewController: UIViewController {
             let result = SearchInDictionary(input: Въведете.text!)
             if !result.isEmpty{
             let resultArr = result.split{$0 == " "}.map(String.init)
-            Значение.text = resultArr[1]
-            Label.text = resultArr[0]
+                Значение.text = resultArr[1].capitalizingFirstLetter()
+                Label.text = resultArr[0].capitalizingFirstLetter()
             }
         }
     }
@@ -134,4 +134,14 @@ class JSONNull: Codable, Hashable {
         try container.encodeNil()
     }
 }
+}
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
+    }
 }
