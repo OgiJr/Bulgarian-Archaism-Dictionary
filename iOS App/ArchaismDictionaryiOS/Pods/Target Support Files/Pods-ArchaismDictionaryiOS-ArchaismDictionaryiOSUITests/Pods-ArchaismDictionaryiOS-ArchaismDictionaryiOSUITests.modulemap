@@ -1,0 +1,6 @@
+framework module Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests {
+  umbrella header "Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

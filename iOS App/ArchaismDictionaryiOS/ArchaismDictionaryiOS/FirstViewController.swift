@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import TesseractOCR
 
 class FirstViewController: UIViewController {
     
@@ -22,7 +23,7 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         InitializeCaptureSession()
     }
-    
+        
     func InitializeCaptureSession(){
         
         session.sessionPreset = AVCaptureSession.Preset.high
@@ -40,32 +41,45 @@ class FirstViewController: UIViewController {
         
         cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
         cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        cameraPreviewLayer?.frame = view.bounds
+        cameraPreviewLayer?.frame = self.view.bounds
         cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
         
         view.layer.insertSublayer(cameraPreviewLayer!, at: 0)
         session.startRunning()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            cameraPreviewLayer?.frame = self.view.bounds
+                   cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.landscapeLeft
+                           }
+    }
+        
     func TakePicture(){
         
         let settings = AVCapturePhotoSettings()
         settings.flashMode = .auto
         cameraCaptureOutput?.capturePhoto(with: settings, delegate: self)
     }
- 
-    func DisplayPhoto(capturedPhoto: UIImage){
-        let imagePreviewController = storyboard?.instantiateViewController(withIdentifier: "ImagePreviewController") as! ImagePreview
-        imagePreviewController.capturedImage = capturedPhoto
-        navigationController?.pushViewController(imagePreviewController, animated: true)
-    }
+    
+    func ScanPhoto(capturedPhoto: UIImage){
+        var result: String = ""
+        if let tesseract = G8Tesseract(language: "bul")
+        {
+          tesseract.engineMode = .tesseractCubeCombined
+          tesseract.pageSegmentationMode = .auto
+          tesseract.image = capturedPhoto
+          tesseract.recognize()
+            
+          if(tesseract.recognizedText != nil){
+            result = tesseract.recognizedText!
+            print(result)
+        }
+        }
+}
     
     @IBAction func Button(_ sender: UIButton) {
         TakePicture()
-    }
-    
-    @IBAction func Назад(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -79,7 +93,7 @@ extension FirstViewController : AVCapturePhotoCaptureDelegate
             if let sampleBuffer = photoSampleBuffer, let dataImage = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer){
                 
                 if let finalImage = UIImage(data: dataImage){
-                    DisplayPhoto(capturedPhoto: finalImage)
+                    ScanPhoto(capturedPhoto: finalImage)
                 }
             }
            }
@@ -93,5 +107,4 @@ class ImagePreview: FirstViewController{
         super.viewDidLoad()
         ImageView.image = capturedImage
     }
-    
 }

@@ -46,7 +46,13 @@ class SecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         DictionaryManager();
+        self.Въведете.delegate = self as? UITextFieldDelegate
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     
     func DictionaryManager()
     {
@@ -103,13 +109,24 @@ class SecondViewController: UIViewController {
         if(Въведете.text != nil){
             let result = SearchInDictionary(input: Въведете.text!)
             if !result.isEmpty{
-            let resultArr = result.split{$0 == " "}.map(String.init)
-                Значение.text = resultArr[1].capitalizingFirstLetter()
+                let resultArr = result.split{$0 == " "}.map(String.init)
                 Label.text = resultArr[0].capitalizingFirstLetter()
+                var array = ""
+                let definitionLength = 1...resultArr.count - 1
+                for i in definitionLength{
+                    if(i == 1){
+                    array += resultArr[i].capitalizingFirstLetter() + " "
+                    }
+                    else{
+                    array += resultArr[i] + " "
+                    }
+                }
+                Значение.text = array
             }
         }
     }
-    
+}
+
 class JSONNull: Codable, Hashable {
 
     public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
@@ -133,7 +150,6 @@ class JSONNull: Codable, Hashable {
         var container = encoder.singleValueContainer()
         try container.encodeNil()
     }
-}
 }
 
 extension String {
