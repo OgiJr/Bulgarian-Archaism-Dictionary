@@ -8,6 +8,10 @@
 
 import UIKit
 import AVFoundation
+<<<<<<< HEAD
+=======
+import TesseractOCR
+>>>>>>> parent of 378b7b7... Major Error Fixed
 
 class FirstViewController: UIViewController {
     
@@ -58,7 +62,7 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         InitializeCaptureSession()
     }
-    
+        
     func InitializeCaptureSession(){
         
         session.sessionPreset = AVCaptureSession.Preset.high
@@ -97,6 +101,7 @@ class FirstViewController: UIViewController {
         cameraCaptureOutput?.capturePhoto(with: settings, delegate: self)
     }
     
+<<<<<<< HEAD
     
     func ScanPhoto(capturedPhoto: UIImage){
             
@@ -124,6 +129,23 @@ class FirstViewController: UIViewController {
             }
         }
     }
+=======
+    func ScanPhoto(capturedPhoto: UIImage){
+        var result: String = ""
+        if let tesseract = G8Tesseract(language: "bul")
+        {
+          tesseract.engineMode = .tesseractCubeCombined
+          tesseract.pageSegmentationMode = .auto
+          tesseract.image = capturedPhoto
+          tesseract.recognize()
+            
+          if(tesseract.recognizedText != nil){
+            result = tesseract.recognizedText!
+            print(result)
+        }
+        }
+}
+>>>>>>> parent of 378b7b7... Major Error Fixed
     
     func DictionaryManager()
     {

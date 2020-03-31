@@ -4,6 +4,11 @@
 target 'ArchaismDictionaryiOS' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+<<<<<<< HEAD
+=======
+  
+pod 'TesseractOCRiOS'
+>>>>>>> parent of 378b7b7... Major Error Fixed
 
   # Pods for ArchaismDictionaryiOS
 
