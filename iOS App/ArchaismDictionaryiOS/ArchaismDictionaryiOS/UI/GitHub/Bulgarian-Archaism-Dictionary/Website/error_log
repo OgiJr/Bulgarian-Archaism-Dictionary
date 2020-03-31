@@ -1,0 +1,50 @@
+[27-Feb-2020 22:33:28 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/archaism/public_html/dictionary.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/dictionary.php on line 15
+[27-Feb-2020 22:36:19 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/archaism/public_html/dictionary.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/dictionary.php on line 15
+[28-Feb-2020 07:30:20 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/archaism/public_html/dictionary.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/dictionary.php on line 15
+[28-Feb-2020 20:12:51 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/archaism/public_html/dictionary.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/dictionary.php on line 15
+[28-Feb-2020 21:40:17 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/archaism/public_html/dictionary.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/dictionary.php on line 15
+[28-Feb-2020 22:38:23 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/archaism/public_html/dictionary.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/dictionary.php on line 15
+[28-Feb-2020 23:10:41 Europe/Sofia] PHP Warning:  Use of undefined constant response - assumed 'response' (this will throw an Error in a future version of PHP) in /home/archaism/public_html/db.php on line 16
+[28-Feb-2020 23:10:41 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined function setCharacterEncoding() in /home/archaism/public_html/db.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/db.php on line 16
+[28-Feb-2020 23:11:46 Europe/Sofia] PHP Warning:  Use of undefined constant response - assumed 'response' (this will throw an Error in a future version of PHP) in /home/archaism/public_html/db.php on line 16
+[28-Feb-2020 23:11:46 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined function setContentType() in /home/archaism/public_html/db.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/db.php on line 16
+[28-Feb-2020 23:17:06 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/archaism/public_html/db.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/db.php on line 7
+[28-Feb-2020 23:17:33 Europe/Sofia] PHP Warning:  mysqli_query() expects at least 2 parameters, 1 given in /home/archaism/public_html/db.php on line 7
+[28-Feb-2020 23:18:50 Europe/Sofia] PHP Warning:  mysqli_query() expects at least 2 parameters, 1 given in /home/archaism/public_html/db.php on line 8
+[28-Feb-2020 23:19:33 Europe/Sofia] PHP Warning:  mysqli_query() expects at least 2 parameters, 1 given in /home/archaism/public_html/db.php on line 8
+[28-Feb-2020 23:19:50 Europe/Sofia] PHP Warning:  mysqli_query() expects at least 2 parameters, 1 given in /home/archaism/public_html/db.php on line 8
+[28-Feb-2020 23:19:50 Europe/Sofia] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home/archaism/public_html/db.php on line 12
+[01-Mar-2020 21:30:32 Europe/Sofia] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /home/archaism/public_html/dictionary.php on line 51
+[03-Mar-2020 20:29:02 Europe/Sofia] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/archaism/public_html/dictionary.php on line 74
+[03-Mar-2020 20:29:19 Europe/Sofia] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/archaism/public_html/dictionary.php on line 74
+[03-Mar-2020 20:29:20 Europe/Sofia] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/archaism/public_html/dictionary.php on line 74
+[03-Mar-2020 20:40:44 Europe/Sofia] PHP Parse error:  syntax error, unexpected end of file in /home/archaism/public_html/dictionary.php on line 118
+[03-Mar-2020 20:42:41 Europe/Sofia] PHP Parse error:  syntax error, unexpected 'h1' (T_STRING), expecting ',' or ';' in /home/archaism/public_html/dictionary.php on line 62
+[03-Mar-2020 20:43:29 Europe/Sofia] PHP Parse error:  syntax error, unexpected end of file in /home/archaism/public_html/dictionary.php on line 117

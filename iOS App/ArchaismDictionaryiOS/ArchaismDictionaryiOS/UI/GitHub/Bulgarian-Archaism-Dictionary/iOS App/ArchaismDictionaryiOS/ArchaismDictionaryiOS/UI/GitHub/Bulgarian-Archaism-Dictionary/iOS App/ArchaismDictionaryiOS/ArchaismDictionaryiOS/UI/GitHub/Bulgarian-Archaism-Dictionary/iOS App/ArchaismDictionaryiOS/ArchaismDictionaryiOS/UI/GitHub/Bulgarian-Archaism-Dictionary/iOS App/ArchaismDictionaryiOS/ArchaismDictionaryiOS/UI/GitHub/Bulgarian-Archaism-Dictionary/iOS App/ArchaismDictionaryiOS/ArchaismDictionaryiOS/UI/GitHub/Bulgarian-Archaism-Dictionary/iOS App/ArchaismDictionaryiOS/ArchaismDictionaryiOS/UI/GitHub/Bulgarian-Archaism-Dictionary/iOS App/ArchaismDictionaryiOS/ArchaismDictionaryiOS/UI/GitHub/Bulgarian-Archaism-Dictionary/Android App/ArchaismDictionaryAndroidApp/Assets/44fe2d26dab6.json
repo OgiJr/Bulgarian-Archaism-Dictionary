@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bulgarian-archaism-dictionary",
+  "private_key_id": "44fe2d26dab63d5409226bf44c6ce509fb418fbd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC0w2ordYVH2Z0N\nx7Qn6E5IkyUAU/lPFndBHXn3g+jjc8Dgd7hGYhjxF5nXBtxO6uBIdcw1q8syQEOI\nRkaV3zc2XAdefcOBkPncqCRSnrRDp7/HhkTj2TX8zWvpyGMsKLogM03GbAsrhe+j\nxWyDJrKUGLntbeuOxT/iy6djf60r8BYx+Ld80N3QEUlqnmgKRnRDgjXOOBrT1hpy\nT6pF1356mYk0rxwbIQ69S53lbJhsaaXWtLE6A7fQ2ny2tp3Y/DBBnzd3maSyIaWr\nFxQA4sO/4EDp8pH3/LPKupWyDbecc31VE6K8uousYVXkzumLbuT4TU+1m3cZ9OPy\n4gzielO3AgMBAAECggEAB8zW7AEqOyt8x3dyorY3ipIu6pC1FWCWzMyE0tVyWz5H\neGgyH3dkNCMclFbLcuxXuUi8AyTio8x6HYtKyHTVYRcfikhLA3BKF+d5iccnaDP4\n5pc4qcxZtAr5OSFYhjNLtNAB7yoCYWJqMNr4D8C/u/xFKaWwoHyKgTLgij6cLmUf\nH0VF5cnOJrMBzYtMw8QzIvRS0fV4hDOG6wWlnytrvQJIPFyRPekOKhoGEyKlm+Vg\nWwU1le6wwyL52Fgf/EcFqCQqz0hAFsY/EJ/gBvWxeCdQtqMo/rzBwThVP6nU5Hsx\nYdGceIdn1IxbmjnLoU1YbTrnvpd2Ullw187hPQEtgQKBgQDxl41+TT0tQTzFUdvQ\nDyx6Hr2kXSrm2yF0Sreo+3XV2MCjvn1Sk5kacifV0JL3Cf71JpSwB3LKHEDzBZ5n\nS7p3nV/Mk9nWYcGsxXWDupShFB13j0jxEEbg6rjULThnUSGHkw8ctC6kW/M9W/Ed\n7trZ6DUCkiCs6SMud9QVJXkFZwKBgQC/iyzWa1ll68iFfsVICvI/BJclVMguY4Tu\ntGWdpBYUf0P2mlTD36yE2FbSHXmbuQyF7NCmwHtSM7fdZZnQCv4yYXUaMVKCuYhc\nNnlP7W/Fch30oOuQE7of0mugNOTVVdApchYPErJAwWLbeBVjxcTE8hoGCGT7RXrh\nLlDcOst9MQKBgQCJnW1wu2iUpauLLnTKkEoiie42eQeeFsZ4qrLxY8Oce2pIG5Lh\nfcfhY5NDXRrJ83yygjaCCswdSnjItbOkXWOrDQ7rxnB4iJi85IFq9tYA5ydd2lWP\nU1k8dxevbM7LM1CpHGCoVg6XevUUR5ISHeO16mp/u2M3e1mZ95HsNbs5EwKBgQC4\nd8S6y6/RJH59clV0yHX8kuMtpLUVV+rSKRIj+774BojhmkhAS83OMruKp7BSdKjG\n4gcgUQdzZzOQGSVE4xFkW893ZkDcfOoCRMQYYcbfFMQcsE2s+BKsSu4z4Dzx6C8N\nez4bTho1mwkl7ERNTk3ujmrZnIQEKinpa72cG1OWQQKBgQDNJVnptev0TC1jONmC\nDRK7BOICH0P7z0rGqsuh3/HfCPGH76rCLjvuo35cc1VFALmN3xMKQUoiwTkVIcne\npO0l5QVYkSDyHH/gcO9l0wOoChr4vDqsLJFhx2XgDF0sscCpa86Ie1aDdre2WlIC\nzIlByhAVlBiNZuPveAwAb681YA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "archaismdictionaryapp@bulgarian-archaism-dictionary.iam.gserviceaccount.com",
+  "client_id": "113606604794513512009",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/archaismdictionaryapp%40bulgarian-archaism-dictionary.iam.gserviceaccount.com"
+}
