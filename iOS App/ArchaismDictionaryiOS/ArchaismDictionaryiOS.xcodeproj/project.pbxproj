@@ -7,14 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		29F451F54C5BB92B983DC09F /* Pods_ArchaismDictionaryiOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818AB2194C103C1BB34EE37A /* Pods_ArchaismDictionaryiOSTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		2C510CB54D076AA51B680D2A /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B73C1A65A0110E4E182508 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		368E99042F509363BD59B295 /* Pods_ArchaismDictionaryiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA389D841A69C024A0392971 /* Pods_ArchaismDictionaryiOS.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		CDC04CF324328DFD007EBF5F /* bul.traineddata in Resources */ = {isa = PBXBuildFile; fileRef = CDC04CF224328DFD007EBF5F /* bul.traineddata */; };
-		CDC04CF724328E7C007EBF5F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC04CF624328E7C007EBF5F /* CoreImage.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		CDC04CFB243360AA007EBF5F /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC04CFA243360AA007EBF5F /* TesseractOCR.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		CDC04CFD243360B6007EBF5F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC04CFC243360B5007EBF5F /* CoreImage.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		CDC04D00243360CC007EBF5F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC04CFC243360B5007EBF5F /* CoreImage.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		31A45E092A9CC1333565EA5B /* Pods_ArchaismDictionaryiOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7759B797972EA8DA6064A0CA /* Pods_ArchaismDictionaryiOSTests.framework */; };
+		8DC01C4E4954E43A3BC6496A /* Pods_ArchaismDictionaryiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B40326004531DF1C19AABBD /* Pods_ArchaismDictionaryiOS.framework */; };
+		918B26D7E2706951B80FD748 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441D923E7643D55397DF8DC1 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework */; };
+		CDC04CFD243360B6007EBF5F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC04CFC243360B5007EBF5F /* CoreImage.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		CDC04D00243360CC007EBF5F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC04CFC243360B5007EBF5F /* CoreImage.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		CDC04D1D2433A431007EBF5F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC04CF624328E7C007EBF5F /* CoreImage.framework */; };
 		CDD45756242B05B000AC3512 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD45755242B05B000AC3512 /* AppDelegate.swift */; };
 		CDD45758242B05B000AC3512 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD45757242B05B000AC3512 /* SceneDelegate.swift */; };
 		CDD4575A242B05B000AC3512 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD45759242B05B000AC3512 /* FirstViewController.swift */; };
@@ -24,15 +22,6 @@
 		CDD45764242B05B500AC3512 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD45762242B05B500AC3512 /* LaunchScreen.storyboard */; };
 		CDD4576F242B05B500AC3512 /* ArchaismDictionaryiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD4576E242B05B500AC3512 /* ArchaismDictionaryiOSTests.swift */; };
 		CDD4577A242B05B500AC3512 /* ArchaismDictionaryiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD45779242B05B500AC3512 /* ArchaismDictionaryiOSUITests.swift */; };
-		CDD4579D242B119D00AC3512 /* OCR.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD45794242B119D00AC3512 /* OCR.png */; };
-		CDD4579E242B119D00AC3512 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD45795242B119D00AC3512 /* Back.png */; };
-		CDD4579F242B119D00AC3512 /* AppLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD45796242B119D00AC3512 /* AppLogo.png */; };
-		CDD457A0242B119D00AC3512 /* Literature.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD45797242B119D00AC3512 /* Literature.png */; };
-		CDD457A1242B119D00AC3512 /* imageedit_2_4586027770.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD45798242B119D00AC3512 /* imageedit_2_4586027770.png */; };
-		CDD457A2242B119D00AC3512 /* Search.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD45799242B119D00AC3512 /* Search.png */; };
-		CDD457A3242B119D00AC3512 /* Loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = CDD4579A242B119D00AC3512 /* Loading.gif */; };
-		CDD457A4242B119D00AC3512 /* Play Store Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD4579B242B119D00AC3512 /* Play Store Logo.png */; };
-		CDD457A5242B119D00AC3512 /* Capture.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD4579C242B119D00AC3512 /* Capture.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,23 +41,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CDC04D1A2433A42E007EBF5F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		03BE1B6C21AE91509DA0896C /* Pods-ArchaismDictionaryiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS.debug.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS/Pods-ArchaismDictionaryiOS.debug.xcconfig"; sourceTree = "<group>"; };
-		35B73C1A65A0110E4E182508 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3697A57180B1CFBE3B59CE5A /* Pods-ArchaismDictionaryiOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOSTests.release.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOSTests/Pods-ArchaismDictionaryiOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		64CA83E058ABB53F0002D11C /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig"; sourceTree = "<group>"; };
-		818AB2194C103C1BB34EE37A /* Pods_ArchaismDictionaryiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArchaismDictionaryiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		96ADB7D261C879BC14A95091 /* Pods-ArchaismDictionaryiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS.release.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS/Pods-ArchaismDictionaryiOS.release.xcconfig"; sourceTree = "<group>"; };
-		987E79726347C71313CEBED6 /* Pods-ArchaismDictionaryiOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOSTests/Pods-ArchaismDictionaryiOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		AEDDC496CD8FF16EEBDF2180 /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		CDC04CF224328DFD007EBF5F /* bul.traineddata */ = {isa = PBXFileReference; lastKnownFileType = file; path = bul.traineddata; sourceTree = "<group>"; };
-		CDC04CF424328E42007EBF5F /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B40326004531DF1C19AABBD /* Pods_ArchaismDictionaryiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArchaismDictionaryiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D20EB3A6A8EC620FFB947D4 /* Pods-ArchaismDictionaryiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS.release.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS/Pods-ArchaismDictionaryiOS.release.xcconfig"; sourceTree = "<group>"; };
+		38DE19EE658E6CAD67481ACF /* Pods-ArchaismDictionaryiOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOSTests/Pods-ArchaismDictionaryiOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		441D923E7643D55397DF8DC1 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7759B797972EA8DA6064A0CA /* Pods_ArchaismDictionaryiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArchaismDictionaryiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		907CE2F5D6E6CD0CBE362C5A /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		955197B53AEF2829506A2C32 /* Pods-ArchaismDictionaryiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS.debug.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS/Pods-ArchaismDictionaryiOS.debug.xcconfig"; sourceTree = "<group>"; };
+		C9B3B24F63BD0009A813E4F2 /* Pods-ArchaismDictionaryiOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOSTests.release.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOSTests/Pods-ArchaismDictionaryiOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		CDC04CF624328E7C007EBF5F /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		CDC04CF824336095007EBF5F /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CDC04CFA243360AA007EBF5F /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDC04CFC243360B5007EBF5F /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
-		CDC04CFE243360BB007EBF5F /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CDD45752242B05B000AC3512 /* ArchaismDictionaryiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArchaismDictionaryiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDD45752242B05B000AC3512 /* Archaism Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Archaism Dictionary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD45755242B05B000AC3512 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD45757242B05B000AC3512 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CDD45759242B05B000AC3512 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -83,16 +80,7 @@
 		CDD45775242B05B500AC3512 /* ArchaismDictionaryiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArchaismDictionaryiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD45779242B05B500AC3512 /* ArchaismDictionaryiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchaismDictionaryiOSUITests.swift; sourceTree = "<group>"; };
 		CDD4577B242B05B500AC3512 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CDD45794242B119D00AC3512 /* OCR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OCR.png; path = ../../../../Graphics/OCR.png; sourceTree = "<group>"; };
-		CDD45795242B119D00AC3512 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Back.png; path = ../../../../Graphics/Back.png; sourceTree = "<group>"; };
-		CDD45796242B119D00AC3512 /* AppLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AppLogo.png; path = ../../../../Graphics/AppLogo.png; sourceTree = "<group>"; };
-		CDD45797242B119D00AC3512 /* Literature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Literature.png; path = ../../../../Graphics/Literature.png; sourceTree = "<group>"; };
-		CDD45798242B119D00AC3512 /* imageedit_2_4586027770.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imageedit_2_4586027770.png; path = ../../../../Graphics/imageedit_2_4586027770.png; sourceTree = "<group>"; };
-		CDD45799242B119D00AC3512 /* Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Search.png; path = ../../../../Graphics/Search.png; sourceTree = "<group>"; };
-		CDD4579A242B119D00AC3512 /* Loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = Loading.gif; path = ../../../../Graphics/Loading.gif; sourceTree = "<group>"; };
-		CDD4579B242B119D00AC3512 /* Play Store Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Play Store Logo.png"; path = "../../../../Graphics/Play Store Logo.png"; sourceTree = "<group>"; };
-		CDD4579C242B119D00AC3512 /* Capture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Capture.png; path = ../../../../Graphics/Capture.png; sourceTree = "<group>"; };
-		EA389D841A69C024A0392971 /* Pods_ArchaismDictionaryiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArchaismDictionaryiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB46CC5C6ECB71CEC91AE8C1 /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,9 +88,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDC04CFB243360AA007EBF5F /* TesseractOCR.framework in Frameworks */,
-				CDC04CF724328E7C007EBF5F /* CoreImage.framework in Frameworks */,
-				368E99042F509363BD59B295 /* Pods_ArchaismDictionaryiOS.framework in Frameworks */,
+				CDC04D1D2433A431007EBF5F /* CoreImage.framework in Frameworks */,
+				8DC01C4E4954E43A3BC6496A /* Pods_ArchaismDictionaryiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDC04CFD243360B6007EBF5F /* CoreImage.framework in Frameworks */,
-				29F451F54C5BB92B983DC09F /* Pods_ArchaismDictionaryiOSTests.framework in Frameworks */,
+				31A45E092A9CC1333565EA5B /* Pods_ArchaismDictionaryiOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +107,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDC04D00243360CC007EBF5F /* CoreImage.framework in Frameworks */,
-				2C510CB54D076AA51B680D2A /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework in Frameworks */,
+				918B26D7E2706951B80FD748 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,15 +117,11 @@
 		AFD1D9AD0B89BDFC44157B33 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CDC04CFE243360BB007EBF5F /* TesseractOCR.framework */,
 				CDC04CFC243360B5007EBF5F /* CoreImage.framework */,
-				CDC04CFA243360AA007EBF5F /* TesseractOCR.framework */,
-				CDC04CF824336095007EBF5F /* TesseractOCR.framework */,
 				CDC04CF624328E7C007EBF5F /* CoreImage.framework */,
-				CDC04CF424328E42007EBF5F /* TesseractOCR.framework */,
-				EA389D841A69C024A0392971 /* Pods_ArchaismDictionaryiOS.framework */,
-				35B73C1A65A0110E4E182508 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework */,
-				818AB2194C103C1BB34EE37A /* Pods_ArchaismDictionaryiOSTests.framework */,
+				0B40326004531DF1C19AABBD /* Pods_ArchaismDictionaryiOS.framework */,
+				441D923E7643D55397DF8DC1 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework */,
+				7759B797972EA8DA6064A0CA /* Pods_ArchaismDictionaryiOSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -146,22 +129,14 @@
 		C5BA7412A2125796F11F708B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				03BE1B6C21AE91509DA0896C /* Pods-ArchaismDictionaryiOS.debug.xcconfig */,
-				96ADB7D261C879BC14A95091 /* Pods-ArchaismDictionaryiOS.release.xcconfig */,
-				AEDDC496CD8FF16EEBDF2180 /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig */,
-				64CA83E058ABB53F0002D11C /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig */,
-				987E79726347C71313CEBED6 /* Pods-ArchaismDictionaryiOSTests.debug.xcconfig */,
-				3697A57180B1CFBE3B59CE5A /* Pods-ArchaismDictionaryiOSTests.release.xcconfig */,
+				955197B53AEF2829506A2C32 /* Pods-ArchaismDictionaryiOS.debug.xcconfig */,
+				2D20EB3A6A8EC620FFB947D4 /* Pods-ArchaismDictionaryiOS.release.xcconfig */,
+				FB46CC5C6ECB71CEC91AE8C1 /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig */,
+				907CE2F5D6E6CD0CBE362C5A /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig */,
+				38DE19EE658E6CAD67481ACF /* Pods-ArchaismDictionaryiOSTests.debug.xcconfig */,
+				C9B3B24F63BD0009A813E4F2 /* Pods-ArchaismDictionaryiOSTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		CDC04CF124328DDE007EBF5F /* Tesseract */ = {
-			isa = PBXGroup;
-			children = (
-				CDC04CF224328DFD007EBF5F /* bul.traineddata */,
-			);
-			path = Tesseract;
 			sourceTree = "<group>";
 		};
 		CDD45749242B05B000AC3512 = {
@@ -179,7 +154,7 @@
 		CDD45753242B05B000AC3512 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CDD45752242B05B000AC3512 /* ArchaismDictionaryiOS.app */,
+				CDD45752242B05B000AC3512 /* Archaism Dictionary.app */,
 				CDD4576A242B05B500AC3512 /* ArchaismDictionaryiOSTests.xctest */,
 				CDD45775242B05B500AC3512 /* ArchaismDictionaryiOSUITests.xctest */,
 			);
@@ -189,8 +164,6 @@
 		CDD45754242B05B000AC3512 /* ArchaismDictionaryiOS */ = {
 			isa = PBXGroup;
 			children = (
-				CDC04CF124328DDE007EBF5F /* Tesseract */,
-				CDD45789242B111100AC3512 /* UI */,
 				CDD45755242B05B000AC3512 /* AppDelegate.swift */,
 				CDD45757242B05B000AC3512 /* SceneDelegate.swift */,
 				CDD45759242B05B000AC3512 /* FirstViewController.swift */,
@@ -221,22 +194,6 @@
 			path = ArchaismDictionaryiOSUITests;
 			sourceTree = "<group>";
 		};
-		CDD45789242B111100AC3512 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				CDD45796242B119D00AC3512 /* AppLogo.png */,
-				CDD45795242B119D00AC3512 /* Back.png */,
-				CDD4579C242B119D00AC3512 /* Capture.png */,
-				CDD45798242B119D00AC3512 /* imageedit_2_4586027770.png */,
-				CDD45797242B119D00AC3512 /* Literature.png */,
-				CDD4579A242B119D00AC3512 /* Loading.gif */,
-				CDD45794242B119D00AC3512 /* OCR.png */,
-				CDD4579B242B119D00AC3512 /* Play Store Logo.png */,
-				CDD45799242B119D00AC3512 /* Search.png */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -244,11 +201,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDD4577E242B05B500AC3512 /* Build configuration list for PBXNativeTarget "ArchaismDictionaryiOS" */;
 			buildPhases = (
-				96D29BB1B04777EB4B5A001E /* [CP] Check Pods Manifest.lock */,
+				81152A62EAA221E713EC1940 /* [CP] Check Pods Manifest.lock */,
 				CDD4574E242B05B000AC3512 /* Sources */,
 				CDD4574F242B05B000AC3512 /* Frameworks */,
 				CDD45750242B05B000AC3512 /* Resources */,
-				C126BF1985E236DB8C9630CB /* [CP] Embed Pods Frameworks */,
+				CDC04D1A2433A42E007EBF5F /* Embed Frameworks */,
+				D6BA5E8D5AFD70C5B4552DB7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -256,14 +214,14 @@
 			);
 			name = ArchaismDictionaryiOS;
 			productName = ArchaismDictionaryiOS;
-			productReference = CDD45752242B05B000AC3512 /* ArchaismDictionaryiOS.app */;
+			productReference = CDD45752242B05B000AC3512 /* Archaism Dictionary.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CDD45769242B05B500AC3512 /* ArchaismDictionaryiOSTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDD45781242B05B500AC3512 /* Build configuration list for PBXNativeTarget "ArchaismDictionaryiOSTests" */;
 			buildPhases = (
-				F439D4499C02F04AA91C9B69 /* [CP] Check Pods Manifest.lock */,
+				3CC0102CEC2AB2806BEF3A43 /* [CP] Check Pods Manifest.lock */,
 				CDD45766242B05B500AC3512 /* Sources */,
 				CDD45767242B05B500AC3512 /* Frameworks */,
 				CDD45768242B05B500AC3512 /* Resources */,
@@ -282,11 +240,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDD45784242B05B500AC3512 /* Build configuration list for PBXNativeTarget "ArchaismDictionaryiOSUITests" */;
 			buildPhases = (
-				73E306ED1DEF4E722958F289 /* [CP] Check Pods Manifest.lock */,
+				FEA726E667B5E91854291ED0 /* [CP] Check Pods Manifest.lock */,
 				CDD45771242B05B500AC3512 /* Sources */,
 				CDD45772242B05B500AC3512 /* Frameworks */,
 				CDD45773242B05B500AC3512 /* Resources */,
-				DA7C1B4E370F87E0A7C276D7 /* [CP] Embed Pods Frameworks */,
+				55C77D0ED4BC18C2275A4859 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -346,19 +304,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDC04CF324328DFD007EBF5F /* bul.traineddata in Resources */,
 				CDD45764242B05B500AC3512 /* LaunchScreen.storyboard in Resources */,
-				CDD457A2242B119D00AC3512 /* Search.png in Resources */,
 				CDD45761242B05B500AC3512 /* Assets.xcassets in Resources */,
-				CDD4579E242B119D00AC3512 /* Back.png in Resources */,
-				CDD457A0242B119D00AC3512 /* Literature.png in Resources */,
-				CDD457A1242B119D00AC3512 /* imageedit_2_4586027770.png in Resources */,
-				CDD457A5242B119D00AC3512 /* Capture.png in Resources */,
-				CDD4579D242B119D00AC3512 /* OCR.png in Resources */,
-				CDD457A3242B119D00AC3512 /* Loading.gif in Resources */,
-				CDD4579F242B119D00AC3512 /* AppLogo.png in Resources */,
 				CDD4575F242B05B000AC3512 /* Main.storyboard in Resources */,
-				CDD457A4242B119D00AC3512 /* Play Store Logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,7 +327,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		73E306ED1DEF4E722958F289 /* [CP] Check Pods Manifest.lock */ = {
+		3CC0102CEC2AB2806BEF3A43 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -394,14 +342,31 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ArchaismDictionaryiOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		96D29BB1B04777EB4B5A001E /* [CP] Check Pods Manifest.lock */ = {
+		55C77D0ED4BC18C2275A4859 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81152A62EAA221E713EC1940 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -423,7 +388,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C126BF1985E236DB8C9630CB /* [CP] Embed Pods Frameworks */ = {
+		D6BA5E8D5AFD70C5B4552DB7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -440,24 +405,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS/Pods-ArchaismDictionaryiOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DA7C1B4E370F87E0A7C276D7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F439D4499C02F04AA91C9B69 /* [CP] Check Pods Manifest.lock */ = {
+		FEA726E667B5E91854291ED0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -472,7 +420,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ArchaismDictionaryiOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -664,7 +612,7 @@
 		};
 		CDD4577F242B05B500AC3512 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03BE1B6C21AE91509DA0896C /* Pods-ArchaismDictionaryiOS.debug.xcconfig */;
+			baseConfigurationReference = 955197B53AEF2829506A2C32 /* Pods-ArchaismDictionaryiOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -675,7 +623,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ARLearn.ArchaismDictionaryiOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Archaism Dictionary";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -683,7 +631,7 @@
 		};
 		CDD45780242B05B500AC3512 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96ADB7D261C879BC14A95091 /* Pods-ArchaismDictionaryiOS.release.xcconfig */;
+			baseConfigurationReference = 2D20EB3A6A8EC620FFB947D4 /* Pods-ArchaismDictionaryiOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -694,7 +642,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ARLearn.ArchaismDictionaryiOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Archaism Dictionary";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -702,7 +650,7 @@
 		};
 		CDD45782242B05B500AC3512 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 987E79726347C71313CEBED6 /* Pods-ArchaismDictionaryiOSTests.debug.xcconfig */;
+			baseConfigurationReference = 38DE19EE658E6CAD67481ACF /* Pods-ArchaismDictionaryiOSTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -724,7 +672,7 @@
 		};
 		CDD45783242B05B500AC3512 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3697A57180B1CFBE3B59CE5A /* Pods-ArchaismDictionaryiOSTests.release.xcconfig */;
+			baseConfigurationReference = C9B3B24F63BD0009A813E4F2 /* Pods-ArchaismDictionaryiOSTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -746,7 +694,7 @@
 		};
 		CDD45785242B05B500AC3512 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AEDDC496CD8FF16EEBDF2180 /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig */;
+			baseConfigurationReference = FB46CC5C6ECB71CEC91AE8C1 /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -766,7 +714,7 @@
 		};
 		CDD45786242B05B500AC3512 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64CA83E058ABB53F0002D11C /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig */;
+			baseConfigurationReference = 907CE2F5D6E6CD0CBE362C5A /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
