@@ -8,7 +8,8 @@
 
 import UIKit
 import AVFoundation
-import TesseractOCR
+import Vision
+import CoreML
 
 class FirstViewController: UIViewController {
     
@@ -23,7 +24,7 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         InitializeCaptureSession()
     }
-        
+    
     func InitializeCaptureSession(){
         
         session.sessionPreset = AVCaptureSession.Preset.high
@@ -61,22 +62,10 @@ class FirstViewController: UIViewController {
         settings.flashMode = .auto
         cameraCaptureOutput?.capturePhoto(with: settings, delegate: self)
     }
-    
+        
     func ScanPhoto(capturedPhoto: UIImage){
-        var result: String = ""
-        if let tesseract = G8Tesseract(language: "bul")
-        {
-          tesseract.engineMode = .tesseractCubeCombined
-          tesseract.pageSegmentationMode = .auto
-          tesseract.image = capturedPhoto
-          tesseract.recognize()
-            
-          if(tesseract.recognizedText != nil){
-            result = tesseract.recognizedText!
-            print(result)
-        }
-        }
-}
+
+    }
     
     @IBAction func Button(_ sender: UIButton) {
         TakePicture()
