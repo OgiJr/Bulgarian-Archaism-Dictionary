@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import TesseractOCR
 
 class FirstViewController: UIViewController {
     
@@ -99,20 +98,10 @@ class FirstViewController: UIViewController {
     }
     
     
-    func ScanPhoto(capturedPhoto: UIImage){        
-        
-        let tesst = G8Tesseract(language: "eng")
-
-        if let tesseract = G8Tesseract(language: "eng") {
-          print("helo")
-          tesseract.engineMode = .tesseractCubeCombined
-          tesseract.pageSegmentationMode = .auto
-          tesseract.image = capturedPhoto
-          tesseract.recognize()
-
-          print(tesseract.recognizedText ?? "no text was detected")
-          ocrResult = tesseract.recognizedText ?? ""
+    func ScanPhoto(capturedPhoto: UIImage){
             
+        
+        
             if(ocrResult != ""){
             
                 let result = SearchInDictionary(input: ocrResult)
@@ -134,7 +123,6 @@ class FirstViewController: UIViewController {
                 Label.text = array
             }
         }
-    }
     }
     
     func DictionaryManager()

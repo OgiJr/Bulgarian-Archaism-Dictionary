@@ -3,16 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31A45E092A9CC1333565EA5B /* Pods_ArchaismDictionaryiOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7759B797972EA8DA6064A0CA /* Pods_ArchaismDictionaryiOSTests.framework */; };
-		8DC01C4E4954E43A3BC6496A /* Pods_ArchaismDictionaryiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B40326004531DF1C19AABBD /* Pods_ArchaismDictionaryiOS.framework */; };
-		918B26D7E2706951B80FD748 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441D923E7643D55397DF8DC1 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework */; };
 		CDC04CFD243360B6007EBF5F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC04CFC243360B5007EBF5F /* CoreImage.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		CDC04D00243360CC007EBF5F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC04CFC243360B5007EBF5F /* CoreImage.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		CDC04D1D2433A431007EBF5F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC04CF624328E7C007EBF5F /* CoreImage.framework */; };
 		CDD45756242B05B000AC3512 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD45755242B05B000AC3512 /* AppDelegate.swift */; };
 		CDD45758242B05B000AC3512 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD45757242B05B000AC3512 /* SceneDelegate.swift */; };
 		CDD4575A242B05B000AC3512 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD45759242B05B000AC3512 /* FirstViewController.swift */; };
@@ -41,28 +37,7 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		CDC04D1A2433A42E007EBF5F /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		0B40326004531DF1C19AABBD /* Pods_ArchaismDictionaryiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArchaismDictionaryiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D20EB3A6A8EC620FFB947D4 /* Pods-ArchaismDictionaryiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS.release.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS/Pods-ArchaismDictionaryiOS.release.xcconfig"; sourceTree = "<group>"; };
-		38DE19EE658E6CAD67481ACF /* Pods-ArchaismDictionaryiOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOSTests/Pods-ArchaismDictionaryiOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		441D923E7643D55397DF8DC1 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7759B797972EA8DA6064A0CA /* Pods_ArchaismDictionaryiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ArchaismDictionaryiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		907CE2F5D6E6CD0CBE362C5A /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig"; sourceTree = "<group>"; };
-		955197B53AEF2829506A2C32 /* Pods-ArchaismDictionaryiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS.debug.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS/Pods-ArchaismDictionaryiOS.debug.xcconfig"; sourceTree = "<group>"; };
-		C9B3B24F63BD0009A813E4F2 /* Pods-ArchaismDictionaryiOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOSTests.release.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOSTests/Pods-ArchaismDictionaryiOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		CDC04CF624328E7C007EBF5F /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		CDC04CFC243360B5007EBF5F /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		CDD45752242B05B000AC3512 /* Archaism Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Archaism Dictionary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,14 +48,10 @@
 		CDD4575E242B05B000AC3512 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDD45760242B05B500AC3512 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDD45763242B05B500AC3512 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CDD45765242B05B500AC3512 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD4576A242B05B500AC3512 /* ArchaismDictionaryiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArchaismDictionaryiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD4576E242B05B500AC3512 /* ArchaismDictionaryiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchaismDictionaryiOSTests.swift; sourceTree = "<group>"; };
-		CDD45770242B05B500AC3512 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD45775242B05B500AC3512 /* ArchaismDictionaryiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArchaismDictionaryiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD45779242B05B500AC3512 /* ArchaismDictionaryiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchaismDictionaryiOSUITests.swift; sourceTree = "<group>"; };
-		CDD4577B242B05B500AC3512 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB46CC5C6ECB71CEC91AE8C1 /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +59,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDC04D1D2433A431007EBF5F /* CoreImage.framework in Frameworks */,
-				8DC01C4E4954E43A3BC6496A /* Pods_ArchaismDictionaryiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +67,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDC04CFD243360B6007EBF5F /* CoreImage.framework in Frameworks */,
-				31A45E092A9CC1333565EA5B /* Pods_ArchaismDictionaryiOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +75,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDC04D00243360CC007EBF5F /* CoreImage.framework in Frameworks */,
-				918B26D7E2706951B80FD748 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,24 +86,8 @@
 			children = (
 				CDC04CFC243360B5007EBF5F /* CoreImage.framework */,
 				CDC04CF624328E7C007EBF5F /* CoreImage.framework */,
-				0B40326004531DF1C19AABBD /* Pods_ArchaismDictionaryiOS.framework */,
-				441D923E7643D55397DF8DC1 /* Pods_ArchaismDictionaryiOS_ArchaismDictionaryiOSUITests.framework */,
-				7759B797972EA8DA6064A0CA /* Pods_ArchaismDictionaryiOSTests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C5BA7412A2125796F11F708B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				955197B53AEF2829506A2C32 /* Pods-ArchaismDictionaryiOS.debug.xcconfig */,
-				2D20EB3A6A8EC620FFB947D4 /* Pods-ArchaismDictionaryiOS.release.xcconfig */,
-				FB46CC5C6ECB71CEC91AE8C1 /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig */,
-				907CE2F5D6E6CD0CBE362C5A /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig */,
-				38DE19EE658E6CAD67481ACF /* Pods-ArchaismDictionaryiOSTests.debug.xcconfig */,
-				C9B3B24F63BD0009A813E4F2 /* Pods-ArchaismDictionaryiOSTests.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		CDD45749242B05B000AC3512 = {
@@ -147,7 +98,6 @@
 				CDD45778242B05B500AC3512 /* ArchaismDictionaryiOSUITests */,
 				CDD45753242B05B000AC3512 /* Products */,
 				AFD1D9AD0B89BDFC44157B33 /* Frameworks */,
-				C5BA7412A2125796F11F708B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -171,7 +121,6 @@
 				CDD4575D242B05B000AC3512 /* Main.storyboard */,
 				CDD45760242B05B500AC3512 /* Assets.xcassets */,
 				CDD45762242B05B500AC3512 /* LaunchScreen.storyboard */,
-				CDD45765242B05B500AC3512 /* Info.plist */,
 			);
 			path = ArchaismDictionaryiOS;
 			sourceTree = "<group>";
@@ -180,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				CDD4576E242B05B500AC3512 /* ArchaismDictionaryiOSTests.swift */,
-				CDD45770242B05B500AC3512 /* Info.plist */,
 			);
 			path = ArchaismDictionaryiOSTests;
 			sourceTree = "<group>";
@@ -189,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				CDD45779242B05B500AC3512 /* ArchaismDictionaryiOSUITests.swift */,
-				CDD4577B242B05B500AC3512 /* Info.plist */,
 			);
 			path = ArchaismDictionaryiOSUITests;
 			sourceTree = "<group>";
@@ -201,12 +148,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDD4577E242B05B500AC3512 /* Build configuration list for PBXNativeTarget "ArchaismDictionaryiOS" */;
 			buildPhases = (
-				81152A62EAA221E713EC1940 /* [CP] Check Pods Manifest.lock */,
 				CDD4574E242B05B000AC3512 /* Sources */,
 				CDD4574F242B05B000AC3512 /* Frameworks */,
 				CDD45750242B05B000AC3512 /* Resources */,
-				CDC04D1A2433A42E007EBF5F /* Embed Frameworks */,
-				D6BA5E8D5AFD70C5B4552DB7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -221,7 +165,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDD45781242B05B500AC3512 /* Build configuration list for PBXNativeTarget "ArchaismDictionaryiOSTests" */;
 			buildPhases = (
-				3CC0102CEC2AB2806BEF3A43 /* [CP] Check Pods Manifest.lock */,
 				CDD45766242B05B500AC3512 /* Sources */,
 				CDD45767242B05B500AC3512 /* Frameworks */,
 				CDD45768242B05B500AC3512 /* Resources */,
@@ -240,11 +183,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDD45784242B05B500AC3512 /* Build configuration list for PBXNativeTarget "ArchaismDictionaryiOSUITests" */;
 			buildPhases = (
-				FEA726E667B5E91854291ED0 /* [CP] Check Pods Manifest.lock */,
 				CDD45771242B05B500AC3512 /* Sources */,
 				CDD45772242B05B500AC3512 /* Frameworks */,
 				CDD45773242B05B500AC3512 /* Resources */,
-				55C77D0ED4BC18C2275A4859 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -325,109 +266,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		3CC0102CEC2AB2806BEF3A43 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ArchaismDictionaryiOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		55C77D0ED4BC18C2275A4859 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		81152A62EAA221E713EC1940 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ArchaismDictionaryiOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D6BA5E8D5AFD70C5B4552DB7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS/Pods-ArchaismDictionaryiOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS/Pods-ArchaismDictionaryiOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArchaismDictionaryiOS/Pods-ArchaismDictionaryiOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FEA726E667B5E91854291ED0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CDD4574E242B05B000AC3512 /* Sources */ = {
@@ -612,7 +450,6 @@
 		};
 		CDD4577F242B05B500AC3512 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 955197B53AEF2829506A2C32 /* Pods-ArchaismDictionaryiOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -631,7 +468,6 @@
 		};
 		CDD45780242B05B500AC3512 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D20EB3A6A8EC620FFB947D4 /* Pods-ArchaismDictionaryiOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -650,7 +486,6 @@
 		};
 		CDD45782242B05B500AC3512 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38DE19EE658E6CAD67481ACF /* Pods-ArchaismDictionaryiOSTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -672,7 +507,6 @@
 		};
 		CDD45783242B05B500AC3512 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9B3B24F63BD0009A813E4F2 /* Pods-ArchaismDictionaryiOSTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -694,7 +528,6 @@
 		};
 		CDD45785242B05B500AC3512 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB46CC5C6ECB71CEC91AE8C1 /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -714,7 +547,6 @@
 		};
 		CDD45786242B05B500AC3512 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 907CE2F5D6E6CD0CBE362C5A /* Pods-ArchaismDictionaryiOS-ArchaismDictionaryiOSUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
