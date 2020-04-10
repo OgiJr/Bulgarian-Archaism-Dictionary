@@ -29,8 +29,10 @@
                 <a href="words.php" class="theme-btn btn-animated">Добави дума</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 <a href="about.php" class="theme-btn btn-animated">За нас</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 <a href="contact.php" class="theme-btn btn-animated">Контакт</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <a href="https://play.google.com/store/apps/details?id=com.archaism.dictionary" class="theme-btn btn-animated">Приложение</a>
-            </div>
+				<a href="https://play.google.com/store/apps/details?id=com.archaism.dictionary" class="theme-btn btn-animated">Приложение (Андроид) </a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				<a href="" class="theme-btn btn-animated">Приложение (Апъл)</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				<a href="https://chrome.google.com/webstore/detail/%D1%80%D0%B5%D1%87%D0%BD%D0%B8%D0%BA-%D0%BD%D0%B0-%D0%B0%D1%80%D1%85%D0%B0%D0%B8%D0%B7%D0%BC%D0%B0/mjepoiimoeebijccpgomhjlpioflpjhd?hl=bg" class="theme-btn btn-animated">Хром допълнение</a>
+			</div>
         </header>
 
         <div class="menu-icon">
