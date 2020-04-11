@@ -24,17 +24,9 @@ if(isset($_POST['login-submit'])) {
          session_start();
          $_SESSION['logged']=true;
          header("Location: ../admin.php?login=success");
-
-
-
       }
 
     }
-
-} else {
-
-    header("Location: ../index.php");
-    exit();
 
 }
 
