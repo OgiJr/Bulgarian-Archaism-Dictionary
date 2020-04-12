@@ -2,7 +2,7 @@
 
 if(isset($_POST['login-submit'])) {
 
-    require 'dbh.inc.php';
+    require 'includes/dbh.inc.php';
 
     $mailuid = $_POST['mailuid'];
     $password = $_POST['pwd'];
@@ -23,7 +23,7 @@ if(isset($_POST['login-submit'])) {
 
          session_start();
          $_SESSION['logged']=true;
-         header("Location: ../admin.php?login=success");
+         header("Location: ../includes/admin.php?login=success");
       }
 
     }

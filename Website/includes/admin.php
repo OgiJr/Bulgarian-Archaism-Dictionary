@@ -1,7 +1,11 @@
 <?php
-  require 'header.php';
+  require 'admin_header.php';
 
-    if(isset($_SESSION['logged'])) {
+/* page left in case of bug in main: adminlog.php */
+
+session_start();
+
+if(isset($_SESSION['logged']) && (($_GET["login"] == "success") || $_GET["login"] == "authorised")) {
 
       $servername = "localhost:3306";
       $dBUsername = "archaism_app";
@@ -25,7 +29,3 @@
     } else {
       echo "<h1>Нямате достъп!</h1>";
     }
-
-
-      require "footer.php";
-  ?>
