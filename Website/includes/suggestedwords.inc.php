@@ -43,10 +43,11 @@ if (isset($_POST['word-submit'])) {
                   }
               }
 
+		$result = "Test";
+		file_put_contents('/dictionaryTest.txt', $result);
 
       mysqli_stmt_close($stmt);
       mysqli_close($conn);
-
     }
 
     ?>

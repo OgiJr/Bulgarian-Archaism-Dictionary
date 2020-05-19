@@ -48,3 +48,62 @@ Stack trace:
 [03-Mar-2020 20:40:44 Europe/Sofia] PHP Parse error:  syntax error, unexpected end of file in /home/archaism/public_html/dictionary.php on line 118
 [03-Mar-2020 20:42:41 Europe/Sofia] PHP Parse error:  syntax error, unexpected 'h1' (T_STRING), expecting ',' or ';' in /home/archaism/public_html/dictionary.php on line 62
 [03-Mar-2020 20:43:29 Europe/Sofia] PHP Parse error:  syntax error, unexpected end of file in /home/archaism/public_html/dictionary.php on line 117
+[21-Mar-2020 08:57:58 Europe/Sofia] PHP Warning:  require(dbh.inc.php): failed to open stream: No such file or directory in /home/archaism/public_html/json_manager.php on line 7
+[21-Mar-2020 08:57:58 Europe/Sofia] PHP Fatal error:  require(): Failed opening required 'dbh.inc.php' (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/archaism/public_html/json_manager.php on line 7
+[21-Mar-2020 08:58:33 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/archaism/public_html/json_manager.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/json_manager.php on line 9
+[21-Mar-2020 08:59:48 Europe/Sofia] PHP Warning:  mysqli_stmt::execute(): invalid object or resource mysqli_stmt
+ in /home/archaism/public_html/json_manager.php on line 10
+[21-Mar-2020 08:59:48 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::fetchAll() in /home/archaism/public_html/json_manager.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/json_manager.php on line 14
+[21-Mar-2020 09:00:41 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined method mysqli_stmt::fetchAll() in /home/archaism/public_html/json_manager.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/json_manager.php on line 13
+[21-Mar-2020 09:03:05 Europe/Sofia] PHP Warning:  mysqli_stmt_bind_param(): invalid object or resource mysqli_stmt
+ in /home/archaism/public_html/json_manager.php on line 10
+[21-Mar-2020 09:03:05 Europe/Sofia] PHP Warning:  mysqli_stmt_execute(): invalid object or resource mysqli_stmt
+ in /home/archaism/public_html/json_manager.php on line 11
+[21-Mar-2020 09:03:05 Europe/Sofia] PHP Warning:  mysqli_stmt_store_result(): invalid object or resource mysqli_stmt
+ in /home/archaism/public_html/json_manager.php on line 12
+[21-Mar-2020 09:03:05 Europe/Sofia] PHP Recoverable fatal error:  Object of class mysqli_stmt could not be converted to string in /home/archaism/public_html/json_manager.php on line 14
+[21-Mar-2020 09:04:40 Europe/Sofia] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/archaism/public_html/json_manager.php on line 12
+[21-Mar-2020 09:10:39 Europe/Sofia] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/archaism/public_html/json_manager.php on line 17
+[21-Mar-2020 09:10:55 Europe/Sofia] PHP Fatal error:  Uncaught TypeError: PDO::__construct() expects parameter 4 to be array, string given in /home/archaism/public_html/json_manager.php:7
+Stack trace:
+#0 /home/archaism/public_html/json_manager.php(7): PDO->__construct('localhost:3306', 'archaism_app', 'DictionaryOfArc...', 'archaism_dictio...')
+#1 {main}
+  thrown in /home/archaism/public_html/json_manager.php on line 7
+[21-Mar-2020 09:16:18 Europe/Sofia] PHP Fatal error:  Uncaught TypeError: PDO::__construct() expects parameter 4 to be array, string given in /home/archaism/public_html/json_manager.php:7
+Stack trace:
+#0 /home/archaism/public_html/json_manager.php(7): PDO->__construct('localhost:3306', 'archaism_app', 'DictionaryOfArc...', 'archaism_dictio...')
+#1 {main}
+  thrown in /home/archaism/public_html/json_manager.php on line 7
+[21-Mar-2020 09:19:39 Europe/Sofia] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/archaism/public_html/json_manager.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/json_manager.php on line 9
+[21-Mar-2020 09:22:36 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 17
+[21-Mar-2020 09:22:36 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 17
+[21-Mar-2020 09:22:36 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 18
+[21-Mar-2020 09:24:28 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 17
+[21-Mar-2020 09:24:28 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 17
+[21-Mar-2020 09:24:28 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 18
+[21-Mar-2020 09:24:29 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 17
+[21-Mar-2020 09:24:29 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 17
+[21-Mar-2020 09:24:29 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 18
+[21-Mar-2020 09:24:30 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 17
+[21-Mar-2020 09:24:30 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 17
+[21-Mar-2020 09:24:30 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 18
+[21-Mar-2020 09:24:30 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 17
+[21-Mar-2020 09:24:30 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 17
+[21-Mar-2020 09:24:30 Europe/Sofia] PHP Warning:  A non-numeric value encountered in /home/archaism/public_html/json_manager.php on line 18
+[21-Mar-2020 09:38:50 Europe/Sofia] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/archaism/public_html/json_manager.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/archaism/public_html/json_manager.php on line 15
+[21-Mar-2020 09:40:14 Europe/Sofia] PHP Warning:  mysqli_set_charset() expects parameter 1 to be mysqli, object given in /home/archaism/public_html/json_manager.php on line 15
