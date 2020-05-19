@@ -11,6 +11,7 @@ using Android.Support.V4.App;
 using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 using ArchaismDictionaryAndroidApp.Network;
 using Google.Apis.Auth.OAuth2;
@@ -22,11 +23,12 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace ArchaismDictionaryAndroidApp
 {
-    [Activity(Label = "@string/app_name", Icon = "@drawable/AppLogo", Theme = "@style/splash", MainLauncher = true)]
+    [Activity(Label = "Арх-Речник", Icon = "@drawable/AppLogo", Theme = "@style/splash", MainLauncher = true)]
     public class MainActivity : AppCompatActivity, ISurfaceHolderCallback, CameraSource.IPictureCallback, INetworkConnection
     {
         #region Variables 
@@ -56,7 +58,6 @@ namespace ArchaismDictionaryAndroidApp
         private EditText searchInput;
         private TextView searchWord;
         private TextView searchDefinition;
-        private Button search;
         #endregion
 
         #region GoogleCredentialVariables
@@ -81,12 +82,16 @@ namespace ArchaismDictionaryAndroidApp
         /// How many words there are in the JSON file
         /// </summary>
         private int wordCount;
+        private object context;
         #endregion
 
         #endregion
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.SetVmPolicy(builder.Build());
+
             base.SetTheme(Resource.Style.splash);
             base.OnCreate(savedInstanceState);
 
@@ -159,7 +164,6 @@ namespace ArchaismDictionaryAndroidApp
             searchInput = FindViewById<EditText>(Resource.Id.dictionaryInput);
             searchWord = FindViewById<TextView>(Resource.Id.dictionaryWord);
             searchDefinition = FindViewById<TextView>(Resource.Id.dictionaryDefinition);
-            search = FindViewById<Button>(Resource.Id.searchButton);
 
             NotLoading();
 
@@ -168,7 +172,15 @@ namespace ArchaismDictionaryAndroidApp
             retry.Click += RemoveErrorScreen;
             bottomBarDict.Click += SearchScreen;
             bottomBarOCR.Click += OCRScreenButton;
-            search.Click += Search;
+            searchInput.EditorAction += (_, e) =>
+            {
+                if (e.ActionId == ImeAction.Done)
+                {
+                    Search();
+                    InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+                    imm.HideSoftInputFromWindow(searchInput.ApplicationWindowToken, 0);
+                }
+            };
 
             unfreezeButton.Enabled = false;
             unfreezeButton.Alpha = 0;
@@ -192,11 +204,15 @@ namespace ArchaismDictionaryAndroidApp
             cameraSource.TakePicture(null, this);
         }
 
-        private void Search(object sender, EventArgs e)
+        private void Search()
         {
-            searchDefinition.Text = FindWordInDictionary(searchInput.Text);
-            string[] arr = searchDefinition.Text.Split(":", 2);
-            searchWord.Text = arr[0];
+            if (searchInput.Text != string.Empty)
+            {
+                string result = FindWordInDictionary(searchInput.Text);
+                string[] arr = result.Split(":", 2);
+                searchDefinition.Text = arr[1];
+                searchWord.Text = arr[0];
+            }
         }
 
         /// <summary>
@@ -324,16 +340,6 @@ namespace ArchaismDictionaryAndroidApp
 
         private void OCRScreen()
         {
-            searchTopBackground.Enabled = false;
-            searchTopBackground.Alpha = 0;
-            searchInput.Enabled = false;
-            searchInput.Alpha = 0;
-            searchWord.Enabled = false;
-            searchWord.Alpha = 0;
-            searchDefinition.Enabled = false;
-            searchDefinition.Alpha = 0;
-            search.Enabled = false;
-            search.Alpha = 0;
 
             cameraView.Enabled = true;
             cameraView.Alpha = 256;
@@ -351,8 +357,6 @@ namespace ArchaismDictionaryAndroidApp
             searchWord.Alpha = 256;
             searchDefinition.Enabled = true;
             searchDefinition.Alpha = 256;
-            search.Enabled = true;
-            search.Alpha = 256;
 
             cameraView.Enabled = false;
             cameraView.Alpha = 0;
@@ -473,7 +477,7 @@ namespace ArchaismDictionaryAndroidApp
         /// </summary>
         /// <param name="bytes">The image input</param>
         /// <returns></returns>
-        private string OCR(byte[] bytes)
+        private async Task<string> OCR(byte[] bytes)
         {
             var img = Image.FromBytes(bytes);
             var response = client.DetectText(img);
@@ -504,7 +508,7 @@ namespace ArchaismDictionaryAndroidApp
 
             if (isConnected == true)
             {
-                result = OCR(data);
+                result = OCR(data).Result;
 
                 if (result != string.Empty)
                 {
@@ -548,30 +552,21 @@ namespace ArchaismDictionaryAndroidApp
                     {
                         final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
                     }
-                    else
-                    {
-                        if (word.Length > 4 && dataBase[i, 0].Length > 4)
-                        {
-                            if (word.Length < dataBase[i, 0].Length)
-                            {
-                                if (dataBase[i, 0].Contains(word) == true)
-                                {
-                                    final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
-                                }
-                            }
-                            else
-                            {
-                                if (dataBase[i, 0].Contains(word) == true)
-                                {
-                                    final = dataBase[i, 0].First().ToString().ToUpper() + String.Join("", dataBase[i, 0].Skip(1)) + ":\n" + dataBase[i, 1].First().ToString().ToUpper() + String.Join("", dataBase[i, 1].Skip(1)) + ".";
-                                }
-                            }
-                        }
-                    }
                 }
             }
+
+            if (final == string.Empty)
+            {
+                final = input + ":\nНе намерихме вашата дума в речника ни. \nМоже да я добавите през нашия уебсайт.";
+            }
+
             return final;
         }
+
+        //public static string FindWordInDictionaryText(string input)
+        //{
+
+        //}
 
         /// <summary>
         /// Reads the JSON file from the internet and assigns its values to the dictionary matrix
@@ -583,7 +578,7 @@ namespace ArchaismDictionaryAndroidApp
             string jsonRead;
 
             WebClient client = new WebClient();
-            jsonRead = client.DownloadString("http://archaismdictionary.bg/json_manager.php");;
+            jsonRead = client.DownloadString("http://archaismdictionary.bg/json_manager.php"); ;
 
             File.WriteAllText(FileSystem.AppDataDirectory + fileName, jsonRead);
 
