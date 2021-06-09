@@ -8,9 +8,9 @@ session_start();
 if(isset($_SESSION['logged']) && (($_GET["login"] == "success") || $_GET["login"] == "authorised")) {
 
       $servername = "localhost:3306";
-      $dBUsername = "archaism_app";
-      $dBPassword = "DictionaryOfArchaism123";
-      $dBName = "archaism_dictionary";
+      $dBUsername = "admin";
+      $dBPassword = "Trajanovisa4";
+      $dBName = "archqetw_archaism_dictionary";
 
       $conn = mysqli_connect($servername, $dBUsername, $dBPassword, $dBName);
 

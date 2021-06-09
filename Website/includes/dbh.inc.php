@@ -1,9 +1,9 @@
 <?php
 
 $servername = "localhost:3306";
-$dBUsername = "archaism_admin";
-$dBPassword = "FuckingCunt123";
-$dBName = "archaism_dictionary";
+$dBUsername = "admin";
+$dBPassword = "Trajanovisa4";
+$dBName = "archqetw_archaism_dictionary";
 
 $conn = mysqli_connect($servername, $dBUsername, $dBPassword, $dBName);
 
